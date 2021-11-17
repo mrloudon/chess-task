@@ -3,6 +3,8 @@ function demonstration() {
     const $status = $("#status");
     const $fen = $("#fen");
     const $pgn = $("#pgn");
+    const practicePosition = "k1q5/pp3rpp/2n4n/8/1P6/4B2P/Q4PP1/R4NK1 w - - 0 1";
+    const testPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
     function onDragStart(source, piece, position, orientation) {
         // do not pick up pieces if the game is over
@@ -71,14 +73,14 @@ function demonstration() {
     const config = {
         draggable: true,
         dropOffBoard: "snapback",
-        position: "start",
+        position: practicePosition,
         onDragStart,
-        onDrop,
         onSnapEnd,
         onDrop
     };
 
     const board = Chessboard("myBoard", config);
+    console.log("Load FEN:", game.load(practicePosition));
     updateStatus();
 }
 

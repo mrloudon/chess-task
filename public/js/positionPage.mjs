@@ -140,6 +140,10 @@ function showPosition() {
     config.draggable = true;
 }
 
+function toMove(){
+    return position.toMove === "w" ? "White to play" : "Black to play";
+}
+
 function nextBtnClick() {
     console.log("Next");
     if (positionIndex < positions.length) {
@@ -147,10 +151,11 @@ function nextBtnClick() {
         positionIndex++;
         nextBtn.disabled = true;
         showPosition();
-        moveTitle.innerHTML = position.toMove === "w" ? "White to move" : "Black to move";
+        moveTitle.innerHTML = toMove();
     }
     else {
         removeListeners();
+        Utility.fadeOut(page);
     }
 }
 
@@ -158,7 +163,7 @@ function resetBtnClick() {
     console.log("Reset");
     nextBtn.disabled = true;
     showPosition();
-    moveTitle.innerHTML = position.toMove === "w" ? "White to move" : "Black to move";
+    moveTitle.innerHTML = toMove();
 }
 
 function removeListeners() {
@@ -179,7 +184,7 @@ function doPractice() {
         toMove: "w"
     }
     attachListeners();
-    moveTitle.innerHTML = position.toMove === "w" ? "White to move" : "Black to move";
+    moveTitle.innerHTML = toMove();
     Utility.fadeIn(page)
         .then(showPosition);
 }

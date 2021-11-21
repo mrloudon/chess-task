@@ -1,13 +1,44 @@
 import * as Utility from "./utility.mjs";
-import { doFrontPage } from "./frontPage.mjs";
+// import { doFrontPage } from "./frontPage.mjs";
 import { doPractice } from "./positionPage.mjs";
-const tasks = [doFrontPage, doEthicsPage, doPrePracticePage, doPractice];
+const tasks = [doLoginPage, doEthicsPage, doPrePracticePage, doPractice];
 
-function doEthicsPage(){
+function doLoginPage() {
+    const page = document.getElementById("login-page");
+    const nextBtn = page.querySelector("button.next-btn");
+    const idInput = document.getElementById("id-input");
+    const invalidLabel = page.querySelector(".invalid-label");
+
+    async function nextBtnClick() {
+        const id = idInput.value.trim();
+        if (!id) {
+            return;
+        }
+        const resp = await fetch(`/validate?id=${id}`);
+        const json = await resp.json();
+        console.log(json);
+        if (json.ok === "VALID") {
+            nextBtn.removeEventListener("click", nextBtnClick);
+            Utility.fadeOut(page)
+                .then(nextTask);
+        }
+        else{
+            invalidLabel.classList.remove("invisible");
+            idInput.focus();
+        }
+    }
+
+    nextBtn.addEventListener("click", nextBtnClick);
+    Utility.fadeIn(page)
+        .then(() => idInput.focus());
+    console.log("login page");
+}
+
+function doEthicsPage() {
     const page = document.getElementById("ethics-page");
     const nextBtn = page.querySelector("button.next-btn");
 
-    function nextBtnClick(){
+    function nextBtnClick() {
         nextBtn.removeEventListener("click", nextBtnClick);
         Utility.fadeOut(page)
             .then(nextTask);
@@ -17,11 +48,11 @@ function doEthicsPage(){
     Utility.fadeIn(page);
 }
 
-function doPrePracticePage(){
+function doPrePracticePage() {
     const page = document.getElementById("pre-practice-page");
     const nextBtn = page.querySelector("button.next-btn");
 
-    function nextBtnClick(){
+    function nextBtnClick() {
         nextBtn.removeEventListener("click", nextBtnClick);
         Utility.fadeOut(page)
             .then(nextTask);

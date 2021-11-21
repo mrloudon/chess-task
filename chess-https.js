@@ -12,9 +12,7 @@ const https = require("https");
 const express = require("express");
 const path = require("path");
 const chessServer = require("./chess-server");
-
 const app = express();
-
 let server;
 
 

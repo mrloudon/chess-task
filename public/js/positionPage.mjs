@@ -10,7 +10,7 @@ const alert = page.querySelector("div.alert");
 const positionTitle = page.querySelector("h2.position-title");
 const moveTitle = page.querySelector("h4.move-title");
 const practicePosition = "k1q5/pp3rpp/2n4n/8/1P6/4B2P/Q4PP1/R4NK1 w - - 0 1";
-const positions = [{
+const Positions = [{
     fen: "r1b2rk1/pp1n1ppp/2p1pn2/q2p2B1/1bPP4/2N1P3/PPQN1PPP/R3KB1R w - - 0 1",
     title: "Position 1",
     toMove: "w"
@@ -86,7 +86,10 @@ let position = {
     title: null,
     toMove: null
 };
-let positionIndex = 0;
+
+let nextTask;
+let blockCompleted = false;
+let positionIndices = [];
 
 function onDragStart(source, piece, position, orientation) {
     alert.innerHTML = `Source: ${source} Piece: ${piece} Position: ${position} Orientation: ${orientation}`;
@@ -104,7 +107,7 @@ function onDragStart(source, piece, position, orientation) {
 }
 
 function onDrop(source, target) {
-    alert.innerHTML = `Source: ${source} Target: ${target}`;
+    // alert.innerHTML = `Source: ${source} Target: ${target}`;
     // see if the move is legal
     const move = game.move({
         from: source,
@@ -130,8 +133,8 @@ function onSnapEnd() {
 }
 
 function showPosition() {
-    alert.innerHTML = position.fen;
     positionTitle.innerHTML = position.title;
+    moveTitle.innerHTML = toMove();
     if (!position) {
         return;
     }
@@ -140,22 +143,22 @@ function showPosition() {
     config.draggable = true;
 }
 
-function toMove(){
+function toMove() {
     return position.toMove === "w" ? "White to play" : "Black to play";
 }
 
 function nextBtnClick() {
-    console.log("Next");
-    if (positionIndex < positions.length) {
-        position = positions[positionIndex];
-        positionIndex++;
-        nextBtn.disabled = true;
-        showPosition();
-        moveTitle.innerHTML = toMove();
+    if (blockCompleted) {
+        removeListeners();
+        Utility.fadeOut(page)
+            .then(nextTask);
     }
     else {
-        removeListeners();
-        Utility.fadeOut(page);
+        position = Positions[positionIndices.shift()];
+        if (positionIndices.length === 0) {
+            blockCompleted = true;
+        }
+        showPosition();
     }
 }
 
@@ -176,7 +179,10 @@ function attachListeners() {
     resetBtn.addEventListener("click", resetBtnClick);
 }
 
-function doPractice() {
+function doPractice(callback) {
+    resetBtn.style.display = "inline-block";
+    nextTask = callback;
+    blockCompleted = true;
     board.clear(false);
     position = {
         title: "Practice Position",
@@ -184,9 +190,23 @@ function doPractice() {
         toMove: "w"
     }
     attachListeners();
-    moveTitle.innerHTML = toMove();
+    alert.innerHTML = `Use this practice position to familiarise yourself with making a move.<br>
+        Click <strong>Next</strong> to move on to the main task. Click <strong>Reset</strong> to reset the practice position.`;
     Utility.fadeIn(page)
         .then(showPosition);
 }
 
-export { doPractice };
+function doBlock1(callback) {
+    resetBtn.style.display = "none";
+    nextBtn.disabled = true;
+    nextTask = callback;
+    blockCompleted = false;
+    positionIndices = [0, 1, 2];
+    position = Positions[positionIndices.shift()];
+    attachListeners();
+    alert.innerHTML = "Block 1";
+    Utility.fadeIn(page)
+        .then(showPosition);
+}
+
+export { doPractice, doBlock1 };

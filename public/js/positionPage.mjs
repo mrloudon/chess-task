@@ -2,6 +2,7 @@
 /* global Chess Chessboard */
 
 import * as Utility from "./utility.mjs";
+import { condition } from "./textPages.mjs";
 
 const page = document.getElementById("position-page");
 const nextBtn = page.querySelector(".next-btn");
@@ -77,7 +78,8 @@ const config = {
     showNotation: false,
     onDragStart,
     onDrop,
-    onSnapEnd
+    onSnapEnd,
+    onMoveEnd
 };
 const game = new Chess();
 const board = Chessboard("chess-board", config);
@@ -90,10 +92,29 @@ let position = {
 let nextTask;
 let blockCompleted = false;
 let positionIndices = [];
+let timeHeader;
+let countDown;
+let countDownIntervalTimer;
+let doingPractice = false;
 
-function onDragStart(source, piece, position, orientation) {
-    alert.innerHTML = `Source: ${source} Piece: ${piece} Position: ${position} Orientation: ${orientation}`;
+function onMoveEnd(){
+    console.log("onMoveEnd()");
+    if(doingPractice){
+        return;
+    }
+    countDown = condition.moveTime;
+    timeHeader.innerHTML = getCountDownString();
+    countDownIntervalTimer = window.setInterval(() => {
+        countDown--;
+        timeHeader.innerHTML = getCountDownString();
+        if(countDown === 0){
+            window.clearInterval(countDownIntervalTimer);
+            countDownIntervalTimer = null;
+        }
+    }, 1000);
+}
 
+function onDragStart(source, piece) {
     // do not pick up pieces if the game is over
     if (game.game_over()) {
         return false;
@@ -158,6 +179,10 @@ function nextBtnClick() {
         if (positionIndices.length === 0) {
             blockCompleted = true;
         }
+        if(countDownIntervalTimer){
+            window.clearInterval(countDownIntervalTimer);
+            countDownIntervalTimer = null;
+        }
         showPosition();
     }
 }
@@ -179,10 +204,20 @@ function attachListeners() {
     resetBtn.addEventListener("click", resetBtnClick);
 }
 
+function getCountDownString(){
+    let mins = (Math.floor(countDown / 60)).toString();
+    let secs = (countDown % 60).toString();
+    if(secs.length < 2){
+        secs = `0${secs}`;
+    }
+    return `${mins}:${secs}`;
+}
+
 function doPractice(callback) {
     resetBtn.style.display = "inline-block";
     nextTask = callback;
     blockCompleted = true;
+    doingPractice = true;
     board.clear(false);
     position = {
         title: "Practice Position",
@@ -201,10 +236,14 @@ function doBlock1(callback) {
     nextBtn.disabled = true;
     nextTask = callback;
     blockCompleted = false;
+    doingPractice = false;
     positionIndices = [0, 1, 2];
     position = Positions[positionIndices.shift()];
     attachListeners();
-    alert.innerHTML = "Block 1";
+    countDown = condition.moveTime;
+    alert.innerHTML = `<h1 class="display-5 font-monospace">${getCountDownString()}</h1>`;
+    timeHeader = page.querySelector("h1.display-5");
+    console.log(timeHeader);
     Utility.fadeIn(page)
         .then(showPosition);
 }

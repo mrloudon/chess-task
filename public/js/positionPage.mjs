@@ -97,19 +97,27 @@ let countDown;
 let countDownIntervalTimer;
 let doingPractice = false;
 
-function onMoveEnd(){
+function onMoveEnd() {
     console.log("onMoveEnd()");
-    if(doingPractice){
+    if (doingPractice) {
         return;
     }
+    nextBtn.disabled = true;
     countDown = condition.moveTime;
+    timeHeader.style.color = "black";
     timeHeader.innerHTML = getCountDownString();
     countDownIntervalTimer = window.setInterval(() => {
         countDown--;
         timeHeader.innerHTML = getCountDownString();
-        if(countDown === 0){
+        if (countDown === 10) {
+            timeHeader.style.color = "red";
+        }
+        if (countDown === 0) {
             window.clearInterval(countDownIntervalTimer);
             countDownIntervalTimer = null;
+            config.draggable = false;
+            nextBtn.disabled = false;
+            moveTitle.innerHTML = "Timeout";
         }
     }, 1000);
 }
@@ -143,7 +151,11 @@ function onDrop(source, target) {
     else {
         config.draggable = false;
         nextBtn.disabled = false;
-        moveTitle.innerHTML = "&nbsp;";
+        moveTitle.innerHTML = "Completed";
+        if (countDownIntervalTimer) {
+            window.clearInterval(countDownIntervalTimer);
+            countDownIntervalTimer = null;
+        }
     }
 }
 
@@ -162,6 +174,7 @@ function showPosition() {
     game.load(position.fen);
     board.position(position.fen);
     config.draggable = true;
+    console.log("draggable true");
 }
 
 function toMove() {
@@ -169,7 +182,7 @@ function toMove() {
 }
 
 function nextBtnClick() {
-    if (blockCompleted) {
+    if (doingPractice || blockCompleted) {
         removeListeners();
         Utility.fadeOut(page)
             .then(nextTask);
@@ -179,7 +192,7 @@ function nextBtnClick() {
         if (positionIndices.length === 0) {
             blockCompleted = true;
         }
-        if(countDownIntervalTimer){
+        if (countDownIntervalTimer) {
             window.clearInterval(countDownIntervalTimer);
             countDownIntervalTimer = null;
         }
@@ -204,10 +217,10 @@ function attachListeners() {
     resetBtn.addEventListener("click", resetBtnClick);
 }
 
-function getCountDownString(){
+function getCountDownString() {
     let mins = (Math.floor(countDown / 60)).toString();
     let secs = (countDown % 60).toString();
-    if(secs.length < 2){
+    if (secs.length < 2) {
         secs = `0${secs}`;
     }
     return `${mins}:${secs}`;
@@ -216,7 +229,6 @@ function getCountDownString(){
 function doPractice(callback) {
     resetBtn.style.display = "inline-block";
     nextTask = callback;
-    blockCompleted = true;
     doingPractice = true;
     board.clear(false);
     position = {
@@ -231,21 +243,21 @@ function doPractice(callback) {
         .then(showPosition);
 }
 
-function doBlock1(callback) {
+function doBlock(callback, indices) {
     resetBtn.style.display = "none";
     nextBtn.disabled = true;
     nextTask = callback;
     blockCompleted = false;
     doingPractice = false;
-    positionIndices = [0, 1, 2];
-    position = Positions[positionIndices.shift()];
+    positionIndices = indices;
+    //position = Positions[positionIndices.shift()];
     attachListeners();
     countDown = condition.moveTime;
     alert.innerHTML = `<h1 class="display-5 font-monospace">${getCountDownString()}</h1>`;
     timeHeader = page.querySelector("h1.display-5");
     console.log(timeHeader);
     Utility.fadeIn(page)
-        .then(showPosition);
+        .then(nextBtnClick);
 }
 
-export { doPractice, doBlock1 };
+export { doPractice, doBlock };

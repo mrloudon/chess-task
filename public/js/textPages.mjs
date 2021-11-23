@@ -68,13 +68,14 @@ function doEthicsPage(callback) {
     Utility.fadeIn(page);
 }
 
-function doBlock1Page(callback) {
-    console.log("doBlock1Page");
+function doBlockPage(callback, titleText) {
+    console.log("doBlockPage");
 
-    const page = document.getElementById("block-1-page");
+    const page = document.getElementById("block-text-page");
     const nextBtn = page.querySelector("button.next-btn");
     const moveTimeSpans = page.querySelectorAll("span.move-time-span");
     const championshipP = page.querySelector("p.championship-p");
+    const title = page.querySelector(".title");
 
     function nextBtnClick() {
         nextBtn.removeEventListener("click", nextBtnClick);
@@ -86,6 +87,7 @@ function doBlock1Page(callback) {
         span.innerHTML = condition.moveTimeText;
     }
     championshipP.innerHTML = condition.championship;
+    title.innerHTML = titleText;
     nextBtn.addEventListener("click", nextBtnClick);
     Utility.fadeIn(page);
 }
@@ -104,4 +106,32 @@ function doPrePracticePage(callback) {
     Utility.fadeIn(page);
 }
 
-export { Conditions, condition, doLoginPage, doEthicsPage, doPrePracticePage, doBlock1Page };
+function doTextInputPage(callback, text){
+    const page = document.getElementById("text-input-page");
+    const alert = page.querySelector("div.alert");
+    const textArea = page.querySelector("textarea");
+    const nextBtn = page.querySelector("button.next-btn");
+
+    function nextBtnClick() {
+        let text = textArea.value.trim();
+        if(!text){
+            textArea.focus()
+            return;
+        }
+        text = text.replace(/(\r\n|\n|\r)/gm, " ");
+        text = text.replace(/,/gm, ";");
+        text = text.replace(/"/gm, "'");
+        console.log(text);
+        nextBtn.removeEventListener("click", nextBtnClick);
+        Utility.fadeOut(page)
+            .then(callback);
+    }
+
+    alert.innerHTML = text;
+    nextBtn.addEventListener("click", nextBtnClick);
+    textArea.value = "";
+    Utility.fadeIn(page)
+        .then(() => textArea.focus());
+}
+
+export { Conditions, condition, doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage };

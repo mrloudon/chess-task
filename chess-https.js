@@ -4,9 +4,6 @@ const PORT = 3001;
 const KEY = "key.pem";
 const CERT = "cert.pem";
 
-//const KEY =  "/etc/ssl/certs/psychlab_massey_ac_nz.pem";
-//const CERT = "/etc/ssl/certs/psychlab_massey_ac_nz.pem";
-
 const fs = require("fs");
 const https = require("https");
 const express = require("express");

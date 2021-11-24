@@ -117,7 +117,7 @@ function onMoveEnd() {
             countDownIntervalTimer = null;
             config.draggable = false;
             nextBtn.disabled = false;
-            moveTitle.innerHTML = "Timeout";
+            moveTitle.innerHTML = "Timeout - click Next to continue";
         }
     }, 1000);
 }
@@ -151,7 +151,7 @@ function onDrop(source, target) {
     else {
         config.draggable = false;
         nextBtn.disabled = false;
-        moveTitle.innerHTML = "Completed";
+        moveTitle.innerHTML = "Move completed - click Next to continue";
         if (countDownIntervalTimer) {
             window.clearInterval(countDownIntervalTimer);
             countDownIntervalTimer = null;

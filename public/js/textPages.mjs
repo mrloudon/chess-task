@@ -134,4 +134,9 @@ function doTextInputPage(callback, text){
         .then(() => textArea.focus());
 }
 
-export { Conditions, condition, doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage };
+function doGoodbyePage(){
+    const page = document.getElementById("goodbye-page");
+    Utility.fadeIn(page);
+}
+
+export { Conditions, condition, doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage, doGoodbyePage };

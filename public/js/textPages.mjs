@@ -134,8 +134,9 @@ function doTextInputPage(callback, text){
 
     alert.innerHTML = text;
     nextBtn.addEventListener("click", nextBtnClick);
-    textArea.addEventListener("click", textAreaKeyPress);
+    textArea.addEventListener("keypress", textAreaKeyPress);
     textArea.value = "";
+    nextBtn.disabled = true;
     Utility.fadeIn(page)
         .then(() => textArea.focus());
 }

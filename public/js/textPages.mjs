@@ -112,6 +112,10 @@ function doTextInputPage(callback, text){
     const textArea = page.querySelector("textarea");
     const nextBtn = page.querySelector("button.next-btn");
 
+    function textAreaKeyPress(){
+        nextBtn.disabled = false;
+    }
+
     function nextBtnClick() {
         let text = textArea.value.trim();
         if(!text){
@@ -123,12 +127,14 @@ function doTextInputPage(callback, text){
         text = text.replace(/"/gm, "'");
         console.log(text);
         nextBtn.removeEventListener("click", nextBtnClick);
+        textArea.removeEventListener("keypress", textAreaKeyPress);
         Utility.fadeOut(page)
             .then(callback);
     }
 
     alert.innerHTML = text;
     nextBtn.addEventListener("click", nextBtnClick);
+    textArea.addEventListener("click", textAreaKeyPress);
     textArea.value = "";
     Utility.fadeIn(page)
         .then(() => textArea.focus());

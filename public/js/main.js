@@ -1,11 +1,11 @@
 import * as Utility from "./utility.mjs";
 // import { doFrontPage } from "./frontPage.mjs";
 import { doPractice, doBlock } from "./positionPage.mjs";
-import { doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage } from "./textPages.mjs";
+import { doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage, doGoodbyePage } from "./textPages.mjs";
 
 //const tasks = [doLoginPage, doEthicsPage, doPrePracticePage, doPractice, doBlock1Page, doBlock1];
 
-const tasks = [doLoginPage, doBlock1Page, doBlock1, doTextInputPage1, doBlock2Page, doBlock2, doTextInputPage2];
+const tasks = [doLoginPage, doBlock1Page, doBlock1, doTextInputPage1, doBlock2Page, doBlock2, doTextInputPage2, doGoodbyePage];
 
 function doBlock1Page(callback) {
     doBlockPage(callback, "Block 1");
@@ -16,11 +16,11 @@ function doBlock2Page(callback) {
 }
 
 function doBlock1(callback) {
-    doBlock(callback, [0]);
+    doBlock(callback, [0, 1, 2]);
 }
 
 function doBlock2(callback) {
-    doBlock(callback, [3, 4]);
+    doBlock(callback, [3, 4, 5]);
 }
 
 function doTextInputPage1(callback) {

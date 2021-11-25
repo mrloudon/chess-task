@@ -1,12 +1,22 @@
 /* eslint-env node */
 
 const fs = require("fs");
-const readline = require('readline');
+const readline = require("readline");
 
 const OUTPUT_FILE = "output.csv";
-const IDS_FILE = "ids.txt";
+const PARTICIPANTS_FILE = "participants.txt";
+const CONDITION_NAMES = {
+    "1": "RapidStandard",
+    "2": "RapidRandom",
+    "3": "BlitzStandard",
+    "4": "BlitzRandom"
+};
 const CSV_HEADER = "CSV header goes here";
-let ids;
+let participants;
+
+function getParticipantFromId(id) {
+    return participants.find(participant => participant.id === id);
+}
 
 function writeCSV(csv) {
     try {
@@ -21,22 +31,28 @@ function writeCSV(csv) {
     }
 }
 
-async function readIds() {
-    const ids = [];
-    const stream = fs.createReadStream(IDS_FILE);
+async function readParticipants() {
+    const participants = [];
+    const stream = fs.createReadStream(PARTICIPANTS_FILE);
     const rl = readline.createInterface({
         input: stream
     });
+    let items;
 
     for await (const line of rl) {
-        ids.push(line);
+        items = line.split(",");
+        participants.push({
+            id: items[0].trim(),
+            conditionCode: parseInt(items[1], 10),
+            conditionName: CONDITION_NAMES[items[1].trim()]
+        });
     }
-    return ids;
+    return participants;
 }
 
 async function attachApp(app) {
 
-    ids = await readIds();
+    participants = await readParticipants();
 
     app.get("/test", (req, resp) => {
         console.log("test");
@@ -47,18 +63,25 @@ async function attachApp(app) {
     });
 
     app.get("/validate", (req, resp) => {
-        const id = req.query.id;
-        let ok;
-        if (id && ids.includes(id)) {
-            ok = "VALID";
+        const id = req.query.id || "";
+        const participant = getParticipantFromId(id);
+        let result;
+
+        if (participant) {
+            result = {
+                ok: "VALID",
+                participant
+            }
         }
         else {
-            ok = "INVALID";
+            result = {
+                ok: "INVALID",
+                participant: {}
+            }
         }
-
         resp
             .status(200)
-            .json({ ok });
+            .json(result);
     });
 
     app.post("/submit", (req, resp) => {

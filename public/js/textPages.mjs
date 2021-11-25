@@ -8,10 +8,37 @@ const Conditions = {
         moveTime: 4 * 5,
         taskTimeText: "45 minutes",
         championship: "Pretend you are playing at The World Rapid Chess Championship."
+    },
+    RapidRandom: {
+        name: "Rapid Random",
+        moveTimeText: "four minutes",
+        moveTime: 4 * 5,
+        taskTimeText: "45 minutes",
+        championship: "Pretend you are playing at The World Rapid Chess Championship."
+    },
+    BlitzStandard: {
+        name: "Blitz Standard",
+        moveTimeText: "40 seconds",
+        moveTime: 4 * 5,
+        taskTimeText: "25 minutes",
+        championship: "Pretend you are playing at The World Blitz Chess Championship."
+    },
+    BlitzRandom: {
+        name: "Blitz Random",
+        moveTimeText: "40 seconds",
+        moveTime: 4 * 5,
+        taskTimeText: "25 minutes",
+        championship: "Pretend you are playing at The World Blitz Chess Championship."
     }
 };
 
 let condition;
+let participant;
+let csv = "";
+
+function addCSV(c){
+    csv += c;
+}
 
 function doLoginPage(callback) {
     const page = document.getElementById("login-page");
@@ -30,8 +57,10 @@ function doLoginPage(callback) {
         const json = await resp.json();
         console.log(json);
         if (json.ok === "VALID") {
-            condition = Conditions.RapidStandard;
-            console.log(condition);
+            participant = json.participant;
+            condition = Conditions[participant.conditionName];
+            csv += `"${participant.id}","${condition.name}"`;
+            console.log("csv:", csv);
             nextBtn.removeEventListener("click", nextBtnClick);
             Utility.fadeOut(page)
                 .then(callback);
@@ -126,6 +155,8 @@ function doTextInputPage(callback, text){
         text = text.replace(/,/gm, ";");
         text = text.replace(/"/gm, "'");
         console.log(text);
+        addCSV(`,"${text}"`);
+        console.log(csv);
         nextBtn.removeEventListener("click", nextBtnClick);
         textArea.removeEventListener("keypress", textAreaKeyPress);
         Utility.fadeOut(page)
@@ -146,4 +177,4 @@ function doGoodbyePage(){
     Utility.fadeIn(page);
 }
 
-export { Conditions, condition, doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage, doGoodbyePage };
+export { Conditions, condition, participant, csv, addCSV, doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage, doGoodbyePage };

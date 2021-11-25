@@ -2,7 +2,7 @@
 /* global Chess Chessboard */
 
 import * as Utility from "./utility.mjs";
-import { condition } from "./textPages.mjs";
+import { condition, csv, addCSV } from "./textPages.mjs";
 
 const page = document.getElementById("position-page");
 const nextBtn = page.querySelector(".next-btn");
@@ -96,12 +96,14 @@ let timeHeader;
 let countDown;
 let countDownIntervalTimer;
 let doingPractice = false;
+let startTime = 0;
 
 function onMoveEnd() {
     console.log("onMoveEnd()");
     if (doingPractice) {
         return;
     }
+    startTime = Date.now();
     nextBtn.disabled = true;
     countDown = condition.moveTime;
     timeHeader.style.color = "black";
@@ -118,6 +120,8 @@ function onMoveEnd() {
             config.draggable = false;
             nextBtn.disabled = false;
             moveTitle.innerHTML = "Timeout - click Next to continue";
+            addCSV(`,"null","null"`);
+            console.log(csv);
         }
     }, 1000);
 }
@@ -149,6 +153,9 @@ function onDrop(source, target) {
         return "snapback";
     }
     else {
+        console.log(source, target);
+        addCSV(`,"${source}","${target}",${Date.now() - startTime}`);
+        console.log(csv);
         config.draggable = false;
         nextBtn.disabled = false;
         moveTitle.innerHTML = "Move completed - click Next to continue";

@@ -39,7 +39,6 @@ function createServer() {
     server = https.createServer({
         key: fs.readFileSync(KEY),
         cert: fs.readFileSync(CERT)
-        //passphrase: "tafR99+d"
     }, app);
     server.listen(PORT, function () {
         console.log(`Express (HTTPS) server listening on port: ${PORT}, worker PID: ${process.pid}`);

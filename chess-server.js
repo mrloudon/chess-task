@@ -11,7 +11,7 @@ const CONDITION_NAMES = {
     "3": "BlitzStandard",
     "4": "BlitzRandom"
 };
-const CSV_HEADER = "CSV header goes here\n";
+const CSV_HEADER = `"Date","Time","IP","ID","Condition","Source","Target","RT","Source","Target","RT","Source","Target","RT","Text","Source","Target","RT","Source","Target","RT","Source","Target","RT","Text"\n`;
 let participants;
 
 function getParticipantFromId(id) {

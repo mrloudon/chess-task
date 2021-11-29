@@ -106,7 +106,6 @@ function onMoveEnd() {
         return;
     }
     startTime = Date.now();
-    //nextBtn.disabled = true;
     countDown = condition.moveTime;
     timeHeader.style.color = "black";
     timeHeader.innerHTML = getCountDownString();
@@ -120,11 +119,10 @@ function onMoveEnd() {
             window.clearInterval(countDownIntervalTimer);
             countDownIntervalTimer = null;
             config.draggable = false;
-            //nextBtn.disabled = false;
-            moveTitle.innerHTML = "Timeout";
+            moveTitle.innerHTML = "Timeout<br>&nbsp;";
             addCSV(`,"null","null",0`);
             console.log(csv);
-            setTimeout(nextBtnClick, interTrialInterval);
+            setTimeout(nextTrial, interTrialInterval);
         }
     }, 1000);
 }
@@ -158,7 +156,10 @@ function onDrop(source, target) {
     else {
         console.log(source, target);
         config.draggable = false;
-        //nextBtn.disabled = false;
+        if (countDownIntervalTimer) {
+            window.clearInterval(countDownIntervalTimer);
+            countDownIntervalTimer = null;
+        }
         if (doingPractice) {
             moveTitle.innerHTML = `Move completed<br>click <span class="text-muted">Reset</span> to repeat practice or <span class="text-muted">Next</span> to continue`;
         }
@@ -166,11 +167,7 @@ function onDrop(source, target) {
             moveTitle.innerHTML = "Move completed<br>&nbsp;";
             addCSV(`,"${source}","${target}",${Date.now() - startTime}`);
             console.log(csv);
-            setTimeout(nextBtnClick, interTrialInterval);
-        }
-        if (countDownIntervalTimer) {
-            window.clearInterval(countDownIntervalTimer);
-            countDownIntervalTimer = null;
+            setTimeout(nextTrial, interTrialInterval);
         }
     }
 }
@@ -197,9 +194,12 @@ function toMove() {
     return position.toMove === "w" ? "White to play<br>&nbsp;" : "Black to play<br>&nbsp;";
 }
 
-function nextBtnClick() {
-    if (doingPractice || blockCompleted) {
-        removeListeners();
+function nextTrial() {
+    if (countDownIntervalTimer) {
+        window.clearInterval(countDownIntervalTimer);
+        countDownIntervalTimer = null;
+    }
+    if (blockCompleted) {
         Utility.fadeOut(page)
             .then(nextTask);
     }
@@ -208,12 +208,14 @@ function nextBtnClick() {
         if (positionIndices.length === 0) {
             blockCompleted = true;
         }
-        if (countDownIntervalTimer) {
-            window.clearInterval(countDownIntervalTimer);
-            countDownIntervalTimer = null;
-        }
         showPosition();
     }
+}
+
+function nextBtnClick() {
+    removeListeners();
+    Utility.fadeOut(page)
+        .then(nextTask);
 }
 
 function resetBtnClick() {
@@ -243,7 +245,7 @@ function getCountDownString() {
 }
 
 function doPractice(callback) {
-    resetBtn.style.display = "inline-block";
+    resetBtn.style.visibility = "visible";
     nextBtn.style.visibility = "visible";
     nextTask = callback;
     doingPractice = true;
@@ -261,9 +263,9 @@ function doPractice(callback) {
 }
 
 function doBlock(callback, indices) {
-    resetBtn.style.display = "none";
-    nextBtn.disabled = true;
+    resetBtn.style.visibility = "hidden";
     nextBtn.style.visibility = "hidden";
+    nextBtn.disabled = true;
     nextTask = callback;
     blockCompleted = false;
     doingPractice = false;
@@ -275,7 +277,7 @@ function doBlock(callback, indices) {
     timeHeader = page.querySelector("h1.display-5");
     console.log(timeHeader);
     Utility.fadeIn(page)
-        .then(nextBtnClick);
+        .then(nextTrial);
 }
 
 export { doPractice, doBlock };

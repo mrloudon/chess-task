@@ -174,6 +174,7 @@ function doTextInputPage(callback, text){
 
 function doGoodbyePage(){
     const page = document.getElementById("goodbye-page");
+    Utility.postCSV(csv);
     Utility.fadeIn(page);
 }
 

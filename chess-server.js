@@ -11,7 +11,7 @@ const CONDITION_NAMES = {
     "3": "BlitzStandard",
     "4": "BlitzRandom"
 };
-const CSV_HEADER = "CSV header goes here";
+const CSV_HEADER = "CSV header goes here\n";
 let participants;
 
 function getParticipantFromId(id) {
@@ -19,16 +19,16 @@ function getParticipantFromId(id) {
 }
 
 function writeCSV(csv) {
-    try {
-        if (!fs.existsSync(OUTPUT_FILE)) {
-            fs.writeFileSync(OUTPUT_FILE, CSV_HEADER);
+    console.log(csv);
+    fs.stat(OUTPUT_FILE, function (err, stat) {
+        if (err === null) {
+            fs.appendFile(OUTPUT_FILE, csv, () => {});
         }
-        fs.appendFile(OUTPUT_FILE, csv, function (err) {
-            if (err) throw err;
-        });
-    } catch (err) {
-        console.error(err);
-    }
+        else {
+            fs.writeFileSync(OUTPUT_FILE, CSV_HEADER);
+            fs.appendFile(OUTPUT_FILE, csv, () => {});
+        }
+    });
 }
 
 async function readParticipants() {
@@ -89,7 +89,6 @@ async function attachApp(app) {
         const ip = req.headers["x-forwarded-for"] || req.ip;
 
         writeCSV(`${dt.toLocaleString()},${ip},${req.body.csv}\n`);
-
         resp
             .status(200)
             .contentType("text/plain")

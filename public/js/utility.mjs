@@ -38,7 +38,7 @@ function ready(callback) {
     }
 }
 
-async function postCSV(csv, condition) {
+/* async function postCSV(csv, condition) {
     const data = {
         csv,
         condition
@@ -58,6 +58,22 @@ async function postCSV(csv, condition) {
         throw Error("POST csv failed server side.");
     }
     return await resp.text();
+} */
+
+async function postCSV(csv) {
+    const data = {
+        csv
+    };
+    fetch("/submit", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).catch(function (err) {
+        console.log("Failed to POST csv.");
+        console.log(err);
+    });
 }
 
 function sanatise(str, length) {

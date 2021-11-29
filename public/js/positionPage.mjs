@@ -9,7 +9,7 @@ const nextBtn = page.querySelector(".next-btn");
 const resetBtn = page.querySelector(".reset-btn");
 const alert = page.querySelector("div.alert");
 const positionTitle = page.querySelector("h2.position-title");
-const moveTitle = page.querySelector("h4.move-title");
+const moveTitle = page.querySelector("h5.move-title");
 const practicePosition = "k1q5/pp3rpp/2n4n/8/1P6/4B2P/Q4PP1/R4NK1 w - - 0 1";
 const Positions = [{
     fen: "r1b2rk1/pp1n1ppp/2p1pn2/q2p2B1/1bPP4/2N1P3/PPQN1PPP/R3KB1R w - - 0 1",
@@ -158,7 +158,12 @@ function onDrop(source, target) {
         console.log(csv);
         config.draggable = false;
         nextBtn.disabled = false;
-        moveTitle.innerHTML = "Move completed - click Next to continue";
+        if(doPractice){
+            moveTitle.innerHTML = `Move completed<br>click <span class="text-muted">Reset</span> to repeat practice or <span class="text-muted">Next</span> to continue`;
+        }
+        else{
+            moveTitle.innerHTML = "Move completed - click Next to continue<br>&nbsp;";
+        }
         if (countDownIntervalTimer) {
             window.clearInterval(countDownIntervalTimer);
             countDownIntervalTimer = null;
@@ -185,7 +190,7 @@ function showPosition() {
 }
 
 function toMove() {
-    return position.toMove === "w" ? "White to play" : "Black to play";
+    return position.toMove === "w" ? "White to play<br>&nbsp;" : "Black to play<br>&nbsp;";
 }
 
 function nextBtnClick() {

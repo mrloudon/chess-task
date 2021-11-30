@@ -161,6 +161,7 @@ function onDrop(source, target) {
             countDownIntervalTimer = null;
         }
         if (doingPractice) {
+            nextBtn.disabled = false;
             moveTitle.innerHTML = `Move completed<br>click <span class="text-muted">Reset</span> to repeat practice or <span class="text-muted">Next</span> to continue`;
         }
         else {
@@ -247,6 +248,7 @@ function getCountDownString() {
 function doPractice(callback) {
     resetBtn.style.visibility = "visible";
     nextBtn.style.visibility = "visible";
+    nextBtn.disabled = true;
     nextTask = callback;
     doingPractice = true;
     board.clear(false);

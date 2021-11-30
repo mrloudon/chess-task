@@ -3,7 +3,7 @@
 const fs = require("fs");
 const readline = require("readline");
 
-const OUTPUT_FILE = "output.csv";
+const OUTPUT_FILE = "public/ChSgHo1TwE.csv";
 const PARTICIPANTS_FILE = "participants.txt";
 const CONDITION_NAMES = {
     "1": "RapidStandard",

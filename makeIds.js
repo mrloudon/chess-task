@@ -14,9 +14,10 @@ let rString;
 
 
 stream.once("open", () => {
-    for(let i = 0; i < 100; i++){
-        rString = randomString(4, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-        stream.write(`${rString}\n`);
+    for(let i = 0; i < 1; i++){
+        rString = randomString(10, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        //stream.write(`${rString}\n`);
+        console.log(rString);
     }
     stream.end();
 });

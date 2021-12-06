@@ -3,3 +3,5 @@ cert.pem
 key.pem
 board1.html
 ids.txt
+key-test.js
+http_server.js

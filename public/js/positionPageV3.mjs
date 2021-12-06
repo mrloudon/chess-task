@@ -11,66 +11,97 @@ const alert = page.querySelector("div.alert");
 const positionTitle = page.querySelector("h2.position-title");
 const moveTitle = page.querySelector("h5.move-title");
 const practicePosition = "k1q5/pp3rpp/2n4n/8/1P6/4B2P/Q4PP1/R4NK1 w - - 0 1";
-const Positions = [{
-    fen: "r1b2rk1/pp1n1ppp/2p1pn2/q2p2B1/1bPP4/2N1P3/PPQN1PPP/R3KB1R w - - 0 1",
-    title: "Position 1",
-    toMove: "w"
-},
-{
-    fen: "3q1rk1/pb1r1ppp/1p6/3p4/1P6/PB2P3/Q2R1PPP/3R2K1 w - - 0 1",
-    title: "Position 2",
-    toMove: "w"
-},
-{
-    fen: "2r2rk1/pp2bp1p/1qb1pnp1/3nN1B1/3P4/P1NQ4/BP3PPP/2R2RK1 w - - 0 1",
-    title: "Position 3",
-    toMove: "w"
-},
-{
-    fen: "r4k2/3r1ppp/p4n2/3pR3/1P6/3B1P2/P5PP/R5K1 w - - 0 1",
-    title: "Position 4",
-    toMove: "w"
-},
-{
-    fen: "rnbqkb1r/ppp2ppp/8/3pP3/4n3/2NP4/PPP3PP/R1BQKBNR b - - 0 1",
-    title: "Position 5",
-    toMove: "b"
-},
-{
-    fen: "3q1r2/r7/2Bp2pk/p1pPp3/P2bPpP1/1P1Q1R2/7P/1R5K b - - 0 1",
-    title: "Position 6",
-    toMove: "b"
-},
-{
-    fen: "r2q2rk/ppp4p/3p4/2b2Q2/3pPPR1/2P2n2/PP3P1P/RNB4K b - - 0 1",
-    title: "Position 7",
-    toMove: "b"
-},
-{
-    fen: "r5k1/2b3pp/p1p1rp2/3pn3/3B4/1P2PNP1/P1R2P1P/5RK1 w - - 0 1",
-    title: "Position 8",
-    toMove: "w"
-},
-{
-    fen: "rnb1kb1r/ppp1pppp/5n2/8/3q4/2N1BQ2/PPP3PP/R3KBNR b - - 0 1",
-    title: "Position 9",
-    toMove: "b"
-},
-{
-    fen: "r1b2rk1/1pp3pp/2qppn2/pN6/PnPP4/1P3NPB/4QP1P/2KR3R b - - 0 1",
-    title: "Position 10",
-    toMove: "b"
-},
-{
-    fen: "2q2nk1/pnbb1pp1/3p4/2p4p/2P4P/1P6/PBK5/6R1 w - - 0 1",
-    title: "Position 11",
-    toMove: "w"
-},
-{
-    fen: "r5k1/3npp2/3p2pp/2pP4/4P3/5NP1/PR3PKP/8 b - - 0 1",
-    title: "Position 12",
-    toMove: "b"
-}];
+const Positions = [
+    {
+        fen: "r1b2rk1/pp1n1ppp/2p1pn2/q2p2B1/1bPP4/2N1P3/PPQN1PPP/R3KB1R w - - 0 1",
+        title: "Position 1",
+        toMove: "w",
+        scores: {
+            "a2-a3": 4,
+            "a1-c1": 4,
+            "d2-b3": 2,
+            "f1-e2": 1
+        }
+    },
+    {
+        fen: "3q1rk1/pb1r1ppp/1p6/3p4/1P6/PB2P3/Q2R1PPP/3R2K1 w - - 0 1",
+        title: "Position 2",
+        toMove: "w",
+        scores: {
+            "b3-d5": 4,
+            "g2-g3": 4,
+            "h2-h3": 3,
+            "d2-d4": 1
+        }
+    },
+    {
+        fen: "2r2rk1/pp2bp1p/1qb1pnp1/3nN1B1/3P4/P1NQ4/BP3PPP/2R2RK1 w - - 0 1",
+        title: "Position 3",
+        toMove: "w",
+        scores: {
+            "a2-d5": 4,
+            "h2-h4": 1,
+            "d3-e2": 1
+        }
+    },
+    {
+        fen: "r4k2/3r1ppp/p4n2/3pR3/1P6/3B1P2/P5PP/R5K1 w - - 0 1",
+        title: "Position 4",
+        toMove: "w",
+        scores: {
+            "a1-c1": 4,
+            "a1-b1": 2,
+            "a2-a4": 1
+        }
+    },
+    {
+        fen: "rnbqkb1r/ppp2ppp/8/3pP3/4n3/2NP4/PPP3PP/R1BQKBNR b - - 0 1",
+        title: "Position 5",
+        toMove: "b",
+        scores: {
+            "e4-c5": 4
+        }
+    },
+    {
+        fen: "3q1r2/r7/2Bp2pk/p1pPp3/P2bPpP1/1P1Q1R2/7P/1R5K b - - 0 1",
+        title: "Position 6",
+        toMove: "b",
+        scores: {
+            "a7-h7": 4,
+            "d8-c8": 3,
+            "f8-h8": 3
+        }
+    },
+    {
+        fen: "r2q2rk/ppp4p/3p4/2b2Q2/3pPPR1/2P2n2/PP3P1P/RNB4K b - - 0 1",
+        title: "Position 7",
+        toMove: "b"
+    },
+    {
+        fen: "r5k1/2b3pp/p1p1rp2/3pn3/3B4/1P2PNP1/P1R2P1P/5RK1 w - - 0 1",
+        title: "Position 8",
+        toMove: "w"
+    },
+    {
+        fen: "rnb1kb1r/ppp1pppp/5n2/8/3q4/2N1BQ2/PPP3PP/R3KBNR b - - 0 1",
+        title: "Position 9",
+        toMove: "b"
+    },
+    {
+        fen: "r1b2rk1/1pp3pp/2qppn2/pN6/PnPP4/1P3NPB/4QP1P/2KR3R b - - 0 1",
+        title: "Position 10",
+        toMove: "b"
+    },
+    {
+        fen: "2q2nk1/pnbb1pp1/3p4/2p4p/2P4P/1P6/PBK5/6R1 w - - 0 1",
+        title: "Position 11",
+        toMove: "w"
+    },
+    {
+        fen: "r5k1/3npp2/3p2pp/2pP4/4P3/5NP1/PR3PKP/8 b - - 0 1",
+        title: "Position 12",
+        toMove: "b"
+    }];
 
 const config = {
     draggable: true,
@@ -98,6 +129,13 @@ let countDown;
 let countDownIntervalTimer;
 let doingPractice = false;
 let startTime = 0;
+
+function getScore(pos, move){
+    if(!pos){
+        return -1;
+    }
+    return pos.scores[move] || 0;
+}
 
 function onMoveEnd() {
     console.log("onMoveEnd()");
@@ -148,6 +186,7 @@ function onDrop(source, target) {
         to: target,
         promotion: "q" // NOTE: always promote to a queen for example simplicity
     });
+    let score;
 
     // illegal move
     if (move === null) {
@@ -162,7 +201,8 @@ function onDrop(source, target) {
         }
         else {
             moveTitle.innerHTML = "Move completed<br>&nbsp;";
-            addCSV(`,"${source}","${target}",${Date.now() - startTime}`);
+            score = getScore(position, `${source}-${target}`);
+            addCSV(`,"${source}","${target}",${score},${Date.now() - startTime}`);
             console.log(csv);
         }
         if (countDownIntervalTimer) {
@@ -185,10 +225,10 @@ function showPosition() {
         return;
     }
     game.load(position.fen);
-    if(position.toMove === "w"){
+    if (position.toMove === "w") {
         board.orientation("white");
     }
-    if(position.toMove === "b"){
+    if (position.toMove === "b") {
         board.orientation("black");
     }
     board.position(position.fen);

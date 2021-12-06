@@ -83,7 +83,6 @@ const config = {
 };
 const game = new Chess();
 const board = Chessboard("chess-board", config);
-const interTrialInterval = 2000;
 
 let position = {
     fen: null,
@@ -120,11 +119,10 @@ function onMoveEnd() {
             window.clearInterval(countDownIntervalTimer);
             countDownIntervalTimer = null;
             config.draggable = false;
-            //nextBtn.disabled = false;
-            moveTitle.innerHTML = "Timeout";
+            nextBtn.disabled = false;
+            moveTitle.innerHTML = "Timeout<br>&nbsp;";
             addCSV(`,"null","null",0`);
             console.log(csv);
-            setTimeout(nextBtnClick, interTrialInterval);
         }
     }, 1000);
 }
@@ -166,7 +164,6 @@ function onDrop(source, target) {
             moveTitle.innerHTML = "Move completed<br>&nbsp;";
             addCSV(`,"${source}","${target}",${Date.now() - startTime}`);
             console.log(csv);
-            setTimeout(nextBtnClick, interTrialInterval);
         }
         if (countDownIntervalTimer) {
             window.clearInterval(countDownIntervalTimer);
@@ -188,6 +185,12 @@ function showPosition() {
         return;
     }
     game.load(position.fen);
+    if(position.toMove === "w"){
+        board.orientation("white");
+    }
+    if(position.toMove === "b"){
+        board.orientation("black");
+    }
     board.position(position.fen);
     config.draggable = true;
     console.log("draggable true");
@@ -244,7 +247,6 @@ function getCountDownString() {
 
 function doPractice(callback) {
     resetBtn.style.display = "inline-block";
-    nextBtn.style.visibility = "visible";
     nextTask = callback;
     doingPractice = true;
     board.clear(false);
@@ -263,7 +265,6 @@ function doPractice(callback) {
 function doBlock(callback, indices) {
     resetBtn.style.display = "none";
     nextBtn.disabled = true;
-    nextBtn.style.visibility = "hidden";
     nextTask = callback;
     blockCompleted = false;
     doingPractice = false;

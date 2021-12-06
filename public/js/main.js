@@ -1,11 +1,11 @@
 import * as Utility from "./utility.mjs";
-import { doPractice, doBlock } from "./positionPageV2.mjs";
+import { doPractice, doBlock } from "./positionPageV3.mjs";
 import { doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage, doGoodbyePage } from "./textPages.mjs";
 
-//const tasks = [doLoginPage,  doBlock1Page, doBlock1, doTextInputPage1, doBlock2Page, doBlock2, doTextInputPage2, doGoodbyePage];
+const tasks = [doLoginPage,  doPractice, doBlock1Page, doBlock1, doTextInputPage1, doBlock2Page, doBlock2, doTextInputPage2, doGoodbyePage];
 
-const tasks = [doLoginPage, doEthicsPage, doPrePracticePage, doPractice,
-    doBlock1Page, doBlock1, doTextInputPage1, doBlock2Page, doBlock2, doTextInputPage2, doGoodbyePage];
+//const tasks = [doLoginPage, doEthicsPage, doPrePracticePage, doPractice,
+//    doBlock1Page, doBlock1, doTextInputPage1, doBlock2Page, doBlock2, doTextInputPage2, doGoodbyePage];
 
 function doBlock1Page(callback) {
     doBlockPage(callback, "Block 1");
@@ -50,4 +50,5 @@ function run() {
     nextTask();
 }
 
+console.log("Position page V3");
 Utility.ready(run);

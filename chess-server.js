@@ -11,7 +11,6 @@ const CONDITION_NAMES = {
     "3": "BlitzStandard",
     "4": "BlitzRandom"
 };
-let temp = `"Date","Time","IP","ID","Condition",`;
 
 const N_POSITIONS = 6;
 const BLOCK_SIZE = 3;
@@ -46,7 +45,7 @@ function writeCSV(csv) {
         }
         else {
             constructCSVHeader();
-            console.log(CSV_HEADER);
+            //console.log(CSV_HEADER);
             fs.writeFileSync(OUTPUT_FILE, CSV_HEADER);
             fs.appendFile(OUTPUT_FILE, csv, () => { });
         }
@@ -77,7 +76,6 @@ async function attachApp(app) {
     participants = await readParticipants();
 
     app.get("/test", (req, resp) => {
-        console.log("test");
         resp
             .status(200)
             .contentType("text/plain")

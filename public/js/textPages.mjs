@@ -36,7 +36,7 @@ let condition;
 let participant;
 let csv = "";
 
-function addCSV(c){
+function addCSV(c) {
     csv += c;
 }
 
@@ -135,19 +135,19 @@ function doPrePracticePage(callback) {
     Utility.fadeIn(page);
 }
 
-function doTextInputPage(callback, text){
+function doTextInputPage(callback, text) {
     const page = document.getElementById("text-input-page");
     const alert = page.querySelector("div.alert");
     const textArea = page.querySelector("textarea");
     const nextBtn = page.querySelector("button.next-btn");
 
-    function textAreaKeyPress(){
+    function textAreaKeyPress() {
         nextBtn.disabled = false;
     }
 
     function nextBtnClick() {
         let text = textArea.value.trim();
-        if(!text){
+        if (!text) {
             textArea.focus()
             return;
         }
@@ -172,7 +172,7 @@ function doTextInputPage(callback, text){
         .then(() => textArea.focus());
 }
 
-function doGoodbyePage(){
+function doGoodbyePage() {
     const page = document.getElementById("goodbye-page");
     Utility.postCSV(csv);
     Utility.fadeIn(page);

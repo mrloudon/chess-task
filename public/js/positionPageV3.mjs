@@ -11,6 +11,7 @@ const alert = page.querySelector("div.alert");
 const positionTitle = page.querySelector("h2.position-title");
 const moveTitle = page.querySelector("h5.move-title");
 const practicePosition = "k1q5/pp3rpp/2n4n/8/1P6/4B2P/Q4PP1/R4NK1 w - - 0 1";
+
 const Positions = [
     {
         fen: "r1b2rk1/pp1n1ppp/2p1pn2/q2p2B1/1bPP4/2N1P3/PPQN1PPP/R3KB1R w - - 0 1",
@@ -101,7 +102,52 @@ const Positions = [
         fen: "r5k1/3npp2/3p2pp/2pP4/4P3/5NP1/PR3PKP/8 b - - 0 1",
         title: "Position 12",
         toMove: "b"
+    },
+    {
+        fen: "RK1QR3/1B1N1pBp/2Npp1p1/7p/1P6/P3PP1P/bn2n1Pb/rk2qr2 w - - 0 1",
+        title: "Position 3R",
+        toMove: "w"
+    },
+    {
+        fen: "B2R3R/p4p2/6p1/1Pp1Kp2/P1n4P/4k3/P6P/2r2r2 w - - 0 1",
+        title: "Position 4R",
+        toMove: "w"
+    },
+    {
+        fen: "rbk5/4R3/PpP5/pP6/p1pp2K1/Pp4PP/3q1r2/QB4R1 b - - 0 1",
+        title: "Position 6R",
+        toMove: "b"
+    },
+    {
+        fen: "br1r4/2R3K1/p3p3/P1P1P3/p1p1p1p1/P1P1B3/1n3P1k/R3N3 w - - 0 1",
+        title: "Position 8R",
+        toMove: "w"
+    },
+    {
+        fen: "5bkq/n1K1p1nb/P7/3pPpPp/1R6/p1Bp4/P7/8  w - - 0 1",
+        title: "Position 11R",
+        toMove: "w"
+    },
+    {
+        fen: "8/Np1K1p2/5kr1/7R/2PnPp1P/pPpPp3/P7/8 b - - 0 1",
+        title: "Position 12R",
+        toMove: "b"
     }];
+
+const PositionNames = {
+    Normal3: 2,
+    Normal4: 3,
+    Normal6: 5,
+    Normal8: 7,
+    Normal11: 10,
+    Normal12: 11,
+    Random3: 12,
+    Random4: 13,
+    Random6: 14,
+    Random8: 15,
+    Random11: 16,
+    Random12: 17
+};
 
 const config = {
     draggable: true,
@@ -131,9 +177,6 @@ let doingPractice = false;
 let startTime = 0;
 
 function getScore(pos, move){
-    if(!pos){
-        return -1;
-    }
     return pos.scores[move] || 0;
 }
 
@@ -247,7 +290,9 @@ function nextBtnClick() {
             .then(nextTask);
     }
     else {
+        //position = Positions[positionIndices.shift()];
         position = Positions[positionIndices.shift()];
+        console.log(position);
         if (positionIndices.length === 0) {
             blockCompleted = true;
         }
@@ -294,7 +339,7 @@ function doPractice(callback) {
         title: "Practice Position",
         fen: practicePosition,
         toMove: "w"
-    }
+    };
     attachListeners();
     alert.innerHTML = `Use this practice position to familiarise yourself with making a move.<br>
         Click <strong>Next</strong> to move on to the main task. Click <strong>Reset</strong> to reset the practice position.`;
@@ -319,4 +364,4 @@ function doBlock(callback, indices) {
         .then(nextBtnClick);
 }
 
-export { doPractice, doBlock };
+export { doPractice, doBlock, PositionNames };

@@ -12,7 +12,6 @@ const chessServer = require("./chess-server");
 const app = express();
 let server;
 
-
 function buildApp() {
     app.use((req, _res, next) => {
         try {

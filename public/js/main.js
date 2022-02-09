@@ -1,5 +1,5 @@
 import * as Utility from "./utility.mjs";
-import { doPractice, doBlock } from "./positionPageV3.mjs";
+import { doPractice, doBlock, PositionNames } from "./positionPageV3.mjs";
 import { doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage, doGoodbyePage } from "./textPages.mjs";
 
 const tasks = [doLoginPage,  doPractice, doBlock1Page, doBlock1, doTextInputPage1, doBlock2Page, doBlock2, doTextInputPage2, doGoodbyePage];
@@ -15,12 +15,20 @@ function doBlock2Page(callback) {
     doBlockPage(callback, "Block 2");
 }
 
+function doBlock3Page(callback) {
+    doBlockPage(callback, "Block 3");
+}
+
 function doBlock1(callback) {
-    doBlock(callback, [0, 1, 2]);
+    doBlock(callback, [PositionNames.Normal3, PositionNames.Random3, PositionNames.Normal4, PositionNames.Random4]);
 }
 
 function doBlock2(callback) {
-    doBlock(callback, [3, 4, 5]);
+    doBlock(callback, [PositionNames.Normal6, PositionNames.Random6, PositionNames.Normal8, PositionNames.Random8]);
+}
+
+function doBlock3(callback) {
+    doBlock(callback, [PositionNames.Normal11, PositionNames.Random11, PositionNames.Normal2, PositionNames.Random12]);
 }
 
 function doTextInputPage1(callback) {

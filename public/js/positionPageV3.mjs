@@ -81,7 +81,10 @@ const Positions = [
     {
         fen: "r5k1/2b3pp/p1p1rp2/3pn3/3B4/1P2PNP1/P1R2P1P/5RK1 w - - 0 1",
         title: "Position 8",
-        toMove: "w"
+        toMove: "w",
+        scores: {
+           
+        }
     },
     {
         fen: "rnb1kb1r/ppp1pppp/5n2/8/3q4/2N1BQ2/PPP3PP/R3KBNR b - - 0 1",
@@ -96,42 +99,66 @@ const Positions = [
     {
         fen: "2q2nk1/pnbb1pp1/3p4/2p4p/2P4P/1P6/PBK5/6R1 w - - 0 1",
         title: "Position 11",
-        toMove: "w"
+        toMove: "w",
+        scores: {
+           
+        }
     },
     {
         fen: "r5k1/3npp2/3p2pp/2pP4/4P3/5NP1/PR3PKP/8 b - - 0 1",
         title: "Position 12",
-        toMove: "b"
+        toMove: "b",
+        scores: {
+           
+        }
     },
     {
         fen: "RK1QR3/1B1N1pBp/2Npp1p1/7p/1P6/P3PP1P/bn2n1Pb/rk2qr2 w - - 0 1",
         title: "Position 3R",
-        toMove: "w"
+        toMove: "w",
+        scores: {
+           
+        }
     },
     {
         fen: "B2R3R/p4p2/6p1/1Pp1Kp2/P1n4P/4k3/P6P/2r2r2 w - - 0 1",
         title: "Position 4R",
-        toMove: "w"
+        toMove: "w",
+        scores: {
+           
+        }
     },
     {
         fen: "rbk5/4R3/PpP5/pP6/p1pp2K1/Pp4PP/3q1r2/QB4R1 b - - 0 1",
         title: "Position 6R",
-        toMove: "b"
+        toMove: "b",
+        scores: {
+           
+        }
     },
     {
         fen: "br1r4/2R3K1/p3p3/P1P1P3/p1p1p1p1/P1P1B3/1n3P1k/R3N3 w - - 0 1",
         title: "Position 8R",
-        toMove: "w"
+        toMove: "w",
+        scores: {
+           
+        }
     },
     {
         fen: "5bkq/n1K1p1nb/P7/3pPpPp/1R6/p1Bp4/P7/8  w - - 0 1",
         title: "Position 11R",
-        toMove: "w"
+        toMove: "w",
+        scores: {
+           
+        }
     },
     {
         fen: "8/Np1K1p2/5kr1/7R/2PnPp1P/pPpPp3/P7/8 b - - 0 1",
         title: "Position 12R",
-        toMove: "b"
+        toMove: "b",
+        scores: {
+           
+        }
     }];
 
 const PositionNames = {
@@ -335,6 +362,7 @@ function doPractice(callback) {
     nextTask = callback;
     doingPractice = true;
     board.clear(false);
+    //position = Positions[PositionNames.Random4];
     position = {
         title: "Practice Position",
         fen: practicePosition,

@@ -1,8 +1,12 @@
 import * as Utility from "./utility.mjs";
 import { doPractice, doBlock, PositionNames } from "./positionPageV3.mjs";
-import { doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage, doGoodbyePage } from "./textPages.mjs";
+import { doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage, doGoodbyePage, condition } from "./textPages.mjs";
 
-const tasks = [doLoginPage,  doPractice, doBlock1Page, doBlock1, doTextInputPage1, doBlock2Page, doBlock2, doTextInputPage2, doGoodbyePage];
+const tasks = [doLoginPage, doPractice, 
+    doBlock1Page, doBlock1, doTextInputPage1, 
+    doBlock2Page, doBlock2, doTextInputPage23, 
+    doBlock3Page, doBlock3, doTextInputPage23, 
+    doGoodbyePage];
 
 //const tasks = [doLoginPage, doEthicsPage, doPrePracticePage, doPractice,
 //    doBlock1Page, doBlock1, doTextInputPage1, doBlock2Page, doBlock2, doTextInputPage2, doGoodbyePage];
@@ -20,23 +24,57 @@ function doBlock3Page(callback) {
 }
 
 function doBlock1(callback) {
-    doBlock(callback, [PositionNames.Normal3, PositionNames.Random3, PositionNames.Normal4, PositionNames.Random4]);
+    let positions;
+    switch (condition.name.toUpperCase()) {
+        case "BLITZ STANDARD":
+        case "RAPID STANDARD":
+            positions = [PositionNames.Normal3, PositionNames.Normal4];
+            break;
+        case "BLITZ RANDOM":
+        case "RAPID RANDOM":
+            positions = [PositionNames.Random3, PositionNames.Random4];
+            break;
+    }
+    doBlock(callback, positions);
 }
 
 function doBlock2(callback) {
-    doBlock(callback, [PositionNames.Normal6, PositionNames.Random6, PositionNames.Normal8, PositionNames.Random8]);
+    let positions;
+    switch (condition.name.toUpperCase()) {
+        case "BLITZ STANDARD":
+        case "RAPID STANDARD":
+            positions = [PositionNames.Normal6, PositionNames.Normal8];
+            break;
+        case "BLITZ RANDOM":
+        case "RAPID RANDOM":
+            positions = [PositionNames.Random6, PositionNames.Random8];
+            break;
+    }
+    doBlock(callback, positions);
 }
 
 function doBlock3(callback) {
-    doBlock(callback, [PositionNames.Normal11, PositionNames.Random11, PositionNames.Normal2, PositionNames.Random12]);
+    let positions;
+    switch (condition.name.toUpperCase()) {
+        case "BLITZ STANDARD":
+        case "RAPID STANDARD":
+            positions = [PositionNames.Normal11, PositionNames.Normal12];
+            break;
+        case "BLITZ RANDOM":
+        case "RAPID RANDOM":
+            positions = [PositionNames.Random11, PositionNames.Random12];
+            break;
+    }
+    doBlock(callback, positions);
 }
+
 
 function doTextInputPage1(callback) {
     const text = "Certain ideas/steps are involved in planning the best chess move. Please list as many ideas/steps as you can think of that are involved.";
     doTextInputPage(callback, text);
 }
 
-function doTextInputPage2(callback) {
+function doTextInputPage23(callback) {
     const text = "Pretend that your friend just walked into the room. Describe the last move you made in enough detail so that your friend could make the same move as you.";
     doTextInputPage(callback, text);
 }

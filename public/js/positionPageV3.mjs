@@ -83,7 +83,7 @@ const Positions = [
         title: "Position 8",
         toMove: "w",
         scores: {
-           
+
         }
     },
     {
@@ -101,7 +101,7 @@ const Positions = [
         title: "Position 11",
         toMove: "w",
         scores: {
-           
+
         }
     },
     {
@@ -109,7 +109,7 @@ const Positions = [
         title: "Position 12",
         toMove: "b",
         scores: {
-           
+
         }
     },
     {
@@ -117,15 +117,19 @@ const Positions = [
         title: "Position 3R",
         toMove: "w",
         scores: {
-           
+            "d7-b6": 4,
+            "a3-a4": 2,
+            "f3-f4": 2,
+            "b7-a6": 2,
+            "b4-b5": 2
         }
     },
     {
-        fen: "B2R3R/p4p2/6p1/1Pp1Kp2/P1n4P/4k3/P6P/2r2r2 w - - 0 1",
-        title: "Position 4R",
+        fen: "B2R3R/p1K2p2/6p1/1Pp2p2/P1n2k1P/8/P6P/2r1r3 w - - 0 1",
+        title: "Position New 4R",
         toMove: "w",
         scores: {
-           
+            "h4-h5": 4
         }
     },
     {
@@ -133,7 +137,7 @@ const Positions = [
         title: "Position 6R",
         toMove: "b",
         scores: {
-           
+            "b8-d6": 4
         }
     },
     {
@@ -141,7 +145,7 @@ const Positions = [
         title: "Position 8R",
         toMove: "w",
         scores: {
-           
+            "g7-f7": 4
         }
     },
     {
@@ -149,7 +153,7 @@ const Positions = [
         title: "Position 11R",
         toMove: "w",
         scores: {
-           
+            "b4-b8": 4
         }
     },
     {
@@ -157,7 +161,7 @@ const Positions = [
         title: "Position 12R",
         toMove: "b",
         scores: {
-           
+            "f6-g7": 4
         }
     }];
 
@@ -203,7 +207,7 @@ let countDownIntervalTimer;
 let doingPractice = false;
 let startTime = 0;
 
-function getScore(pos, move){
+function getScore(pos, move) {
     return pos.scores[move] || 0;
 }
 

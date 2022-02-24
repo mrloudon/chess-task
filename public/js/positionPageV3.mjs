@@ -40,9 +40,9 @@ const Positions = [
         title: "Position 3",
         toMove: "w",
         scores: {
-            "a2-d5": 4,
-            "h2-h4": 1,
-            "d3-e2": 1
+            "a2-d5": 3.42,
+            "h2-h4": 0.99,
+            "d3-e2": 0.77
         }
     },
     {
@@ -50,9 +50,9 @@ const Positions = [
         title: "Position 4",
         toMove: "w",
         scores: {
-            "a1-c1": 4,
-            "a1-b1": 2,
-            "a2-a4": 1
+            "a1-c1": 2.18,
+            "a1-b1": 1.25,
+            "a2-a4": 1.14
         }
     },
     {
@@ -68,9 +68,9 @@ const Positions = [
         title: "Position 6",
         toMove: "b",
         scores: {
-            "a7-h7": 4,
-            "d8-c8": 3,
-            "f8-h8": 3
+            "a7-h7": 3.11,
+            "d8-c8": 2.69,
+            "f8-h8": 2.65
         }
     },
     {
@@ -83,6 +83,8 @@ const Positions = [
         title: "Position 8",
         toMove: "w",
         scores: {
+            "d4-e5": 3.49,
+            "f3-e1": 1.10
 
         }
     },
@@ -94,7 +96,14 @@ const Positions = [
     {
         fen: "r1b2rk1/1pp3pp/2qppn2/pN6/PnPP4/1P3NPB/4QP1P/2KR3R b - - 0 1",
         title: "Position 10",
-        toMove: "b"
+        toMove: "b",
+        scores: {
+            "f8-f7": 0.49,
+            "g8-h8": 0.47,
+            "e6-e5": 0.47,
+            "h7-h6": 0.16
+
+        }
     },
     {
         fen: "2q2nk1/pnbb1pp1/3p4/2p4p/2P4P/1P6/PBK5/6R1 w - - 0 1",
@@ -109,7 +118,9 @@ const Positions = [
         title: "Position 12",
         toMove: "b",
         scores: {
-
+            "a8-a4": 2.94,
+            "g8-g7": 2.73,
+            "g8-f8": 2.62
         }
     },
     {
@@ -117,11 +128,11 @@ const Positions = [
         title: "Position 3R",
         toMove: "w",
         scores: {
-            "d7-b6": 4,
-            "a3-a4": 2,
-            "f3-f4": 2,
-            "b7-a6": 2,
-            "b4-b5": 2
+            "d7-b6": 2.06,
+            "a3-a4": 1.74,
+            "f3-f4": 1.65,
+            "b7-a6": 1.65,
+            "b4-b5": 1.61
         }
     },
     {
@@ -208,7 +219,7 @@ let doingPractice = false;
 let startTime = 0;
 
 function getScore(pos, move) {
-    return pos.scores[move] || 0;
+    return pos.scores[move] || 0.0;
 }
 
 function onMoveEnd() {

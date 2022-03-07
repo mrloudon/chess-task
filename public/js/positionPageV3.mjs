@@ -140,7 +140,8 @@ const Positions = [
         title: "Position New 4R",
         toMove: "w",
         scores: {
-            "h4-h5": 4
+            "h4-h5": 1.14,
+            "h8-e8": 0.61
         }
     },
     {
@@ -148,7 +149,7 @@ const Positions = [
         title: "Position 6R",
         toMove: "b",
         scores: {
-            "b8-d6": 4
+            "b8-d6": 6.9
         }
     },
     {
@@ -156,7 +157,15 @@ const Positions = [
         title: "Position 8R",
         toMove: "w",
         scores: {
-            "g7-f7": 4
+            "g7-f7": 0.14
+        }
+    },
+    {
+        fen: "1Nq5/RppNRBpn/3rp2p/2K2pPp/QPP2kbP/P1P5/6Pn/1r6  b - - 0 1",
+        title: "Position 10R",
+        toMove: "b",
+        scores: {
+            "g4-d1": 2.9
         }
     },
     {
@@ -167,6 +176,7 @@ const Positions = [
             "b4-b8": 4
         }
     },
+    
     {
         fen: "8/Np1K1p2/5kr1/7R/2PnPp1P/pPpPp3/P7/8 b - - 0 1",
         title: "Position 12R",
@@ -181,14 +191,14 @@ const PositionNames = {
     Normal4: 3,
     Normal6: 5,
     Normal8: 7,
-    Normal11: 10,
+    Normal10: 9,
     Normal12: 11,
     Random3: 12,
     Random4: 13,
     Random6: 14,
     Random8: 15,
-    Random11: 16,
-    Random12: 17
+    Random10: 16,
+    Random12: 18
 };
 
 const config = {
@@ -377,12 +387,12 @@ function doPractice(callback) {
     nextTask = callback;
     doingPractice = true;
     board.clear(false);
-    //position = Positions[PositionNames.Random4];
-    position = {
+    position = Positions[PositionNames.Random10];
+    /* position = {
         title: "Practice Position",
         fen: practicePosition,
         toMove: "w"
-    };
+    }; */
     attachListeners();
     alert.innerHTML = `Use this practice position to familiarise yourself with making a move.<br>
         Click <strong>Next</strong> to move on to the main task. Click <strong>Reset</strong> to reset the practice position.`;

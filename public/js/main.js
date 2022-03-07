@@ -58,11 +58,11 @@ function doBlock3(callback) {
     switch (condition.name.toUpperCase()) {
         case "BLITZ STANDARD":
         case "RAPID STANDARD":
-            positions = [PositionNames.Normal11, PositionNames.Normal12];
+            positions = [PositionNames.Normal10, PositionNames.Normal12];
             break;
         case "BLITZ RANDOM":
         case "RAPID RANDOM":
-            positions = [PositionNames.Random11, PositionNames.Random12];
+            positions = [PositionNames.Random10, PositionNames.Random12];
             break;
     }
     doBlock(callback, positions);

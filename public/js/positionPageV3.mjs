@@ -234,6 +234,8 @@ function getScore(pos, move) {
     return pos.scores[move] || 0.0;
 }
 
+// Fires on completion of board setup - this is when the position is drawn, 
+// not when the subject has completed their move.
 function onMoveEnd() {
     console.log("onMoveEnd()");
     if (doingPractice) {
@@ -348,7 +350,6 @@ function nextBtnClick() {
             .then(nextTask);
     }
     else {
-        //position = Positions[positionIndices.shift()];
         position = Positions[positionIndices.shift()];
         console.log(position);
         if (positionIndices.length === 0) {
@@ -393,12 +394,12 @@ function doPractice(callback) {
     nextTask = callback;
     doingPractice = true;
     board.clear(false);
-    position = Positions[PositionNames.Random10];
-    /* position = {
+    //position = Positions[PositionNames.Random10];
+    position = {
         title: "Practice Position",
         fen: practicePosition,
         toMove: "w"
-    }; */
+    };
     attachListeners();
     alert.innerHTML = `Use this practice position to familiarise yourself with making a move.<br>
         Click <strong>Next</strong> to move on to the main task. Click <strong>Reset</strong> to reset the practice position.`;
@@ -418,7 +419,6 @@ function doBlock(callback, indices) {
     countDown = condition.moveTime;
     alert.innerHTML = `<h1 class="display-5 font-monospace">${getCountDownString()}</h1>`;
     timeHeader = page.querySelector("h1.display-5");
-    console.log(timeHeader);
     Utility.fadeIn(page)
         .then(nextBtnClick);
 }

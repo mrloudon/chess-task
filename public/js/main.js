@@ -2,7 +2,7 @@ import * as Utility from "./utility.mjs";
 import { doPractice, doBlock, PositionNames } from "./positionPageV3.mjs";
 import { doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage, doGoodbyePage, condition } from "./textPages.mjs";
 
-const tasks = [doLoginPage, doPractice, 
+const tasks = [doLoginPage, doEthicsPage, doPrePracticePage, doPractice, 
     doBlock1Page, doBlock1, doTextInputPage1, 
     doBlock2Page, doBlock2, doTextInputPage23, 
     doBlock3Page, doBlock3, doTextInputPage23, 

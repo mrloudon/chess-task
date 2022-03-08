@@ -8,8 +8,10 @@ const page = document.getElementById("position-page");
 const nextBtn = page.querySelector(".next-btn");
 const resetBtn = page.querySelector(".reset-btn");
 const alert = page.querySelector("div.alert");
-const positionTitle = page.querySelector("h2.position-title");
-const moveTitle = page.querySelector("h5.move-title");
+const positionTitle = page.querySelector(".position-title");
+const moveTitle = page.querySelector(".move-title");
+const topHeading = page.querySelector(".top-heading");
+const bottomHeading = page.querySelector(".bottom-heading");
 const practicePosition = "k1q5/pp3rpp/2n4n/8/1P6/4B2P/Q4PP1/R4NK1 w - - 0 1";
 
 const Positions = [
@@ -204,7 +206,7 @@ const PositionNames = {
 const config = {
     draggable: true,
     dropOffBoard: "snapback",
-    showNotation: false,
+    showNotation: true,
     onDragStart,
     onDrop,
     onSnapEnd,
@@ -322,9 +324,13 @@ function showPosition() {
     game.load(position.fen);
     if (position.toMove === "w") {
         board.orientation("white");
+        topHeading.innerHTML = "Black";
+        bottomHeading.innerHTML = "White";
     }
     if (position.toMove === "b") {
         board.orientation("black");
+        topHeading.innerHTML = "White";
+        bottomHeading.innerHTML = "Black";
     }
     board.position(position.fen);
     config.draggable = true;

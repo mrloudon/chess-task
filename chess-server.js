@@ -13,7 +13,7 @@ const CONDITION_NAMES = {
 };
 
 const N_POSITIONS = 6;
-const BLOCK_SIZE = 3;
+const BLOCK_SIZE = 2;
 
 let CSV_HEADER;
 //const CSV_HEADER = `"Date","Time","IP","ID","Condition","Source","Target","Score","RT","Source","Target","Score","RT","Source","Target","Score","RT","Text","Source","Target","Score","RT","Source","Target","Score","RT","Source","Target","Score","RT","Text"\n`;
@@ -21,13 +21,14 @@ let participants;
 
 function constructCSVHeader() {
     let positionNumber;
+    let currentBlock = 1;
 
     CSV_HEADER = `"Date","Time","IP","ID","Condition"`;
     for (let i = 0; i < N_POSITIONS; i++) {
         positionNumber = i + 1;
         CSV_HEADER += `,"Source ${positionNumber}","Target ${positionNumber}","Score ${positionNumber}","RT ${positionNumber}"`;
         if(positionNumber % BLOCK_SIZE === 0){
-            CSV_HEADER += `,"Text ${positionNumber}"`;
+            CSV_HEADER += `,"Text ${currentBlock++}"`;
         }
     }
     CSV_HEADER += "\n";
@@ -44,8 +45,6 @@ function writeCSV(csv) {
             fs.appendFile(OUTPUT_FILE, csv, () => { });
         }
         else {
-            constructCSVHeader();
-            //console.log(CSV_HEADER);
             fs.writeFileSync(OUTPUT_FILE, CSV_HEADER);
             fs.appendFile(OUTPUT_FILE, csv, () => { });
         }
@@ -116,5 +115,7 @@ async function attachApp(app) {
     });
 
 }
+constructCSVHeader();
+console.log("Header", CSV_HEADER);
 
 module.exports = { attachApp };

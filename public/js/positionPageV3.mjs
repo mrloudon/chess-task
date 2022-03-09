@@ -178,13 +178,15 @@ const Positions = [
             "b4-b8": 4
         }
     },
-    
+
     {
         fen: "8/Np1K1p2/5kr1/7R/2PnPp1P/pPpPp3/P7/8 b - - 0 1",
         title: "Position 12R",
         toMove: "b",
         scores: {
-            "f6-g7": 4
+            "f6-g7": 13.98,
+            "e3-e2": 13.40,
+            "c3-c2": 11.70
         }
     }];
 

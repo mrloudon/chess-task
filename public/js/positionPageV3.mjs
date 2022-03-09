@@ -258,7 +258,7 @@ function onMoveEnd() {
             config.draggable = false;
             nextBtn.disabled = false;
             moveTitle.innerHTML = "Timeout<br>&nbsp;";
-            addCSV(`,"null","null",0`);
+            addCSV(`,"null","null",0,"null"`);
             console.log(csv);
         }
     }, 1000);

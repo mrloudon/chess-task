@@ -231,6 +231,7 @@ let countDown;
 let countDownIntervalTimer;
 let doingPractice = false;
 let startTime = 0;
+let positionCounter = 1;
 
 function getScore(pos, move) {
     return pos.scores[move] || 0.0;
@@ -320,7 +321,14 @@ function onSnapEnd() {
 }
 
 function showPosition() {
-    positionTitle.innerHTML = position.title;
+    //positionTitle.innerHTML = position.title;
+    if (position.title === "Practice Position") {
+        positionTitle.innerHTML = position.title;
+    }
+    else {
+        positionTitle.innerHTML = `Position ${positionCounter}`;
+        positionCounter++;
+    }
     moveTitle.innerHTML = toMove();
     if (!position) {
         return;

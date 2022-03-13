@@ -6,28 +6,28 @@ const Conditions = {
         name: "Rapid Standard",
         moveTimeText: "four minutes",
         moveTime: 4 * 60,
-        taskTimeText: "45 minutes",
+        taskTimeText: "40 minutes",
         championship: "Pretend you are playing at The World Rapid Chess Championship."
     },
     RapidRandom: {
         name: "Rapid Random",
         moveTimeText: "four minutes",
         moveTime: 4 * 60,
-        taskTimeText: "45 minutes",
+        taskTimeText: "40 minutes",
         championship: "Pretend you are playing at The World Rapid Chess Championship."
     },
     BlitzStandard: {
         name: "Blitz Standard",
         moveTimeText: "40 seconds",
         moveTime: 40,
-        taskTimeText: "25 minutes",
+        taskTimeText: "20 minutes",
         championship: "Pretend you are playing at The World Blitz Chess Championship."
     },
     BlitzRandom: {
         name: "Blitz Random",
         moveTimeText: "40 seconds",
         moveTime: 40,
-        taskTimeText: "25 minutes",
+        taskTimeText: "20 minutes",
         championship: "Pretend you are playing at The World Blitz Chess Championship."
     }
 };

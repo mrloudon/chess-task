@@ -116,6 +116,6 @@ async function attachApp(app) {
 
 }
 constructCSVHeader();
-console.log("Header", CSV_HEADER);
+//console.log("Header", CSV_HEADER);
 
 module.exports = { attachApp };

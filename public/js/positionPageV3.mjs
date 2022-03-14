@@ -167,7 +167,8 @@ const Positions = [
         title: "Position 10R",
         toMove: "b",
         scores: {
-            "g4-d1": 2.9
+            "g4-d1": 2.9,
+            "h7-f8": 1.87
         }
     },
     {

@@ -145,6 +145,11 @@ function doTextInputPage(callback, text) {
         nextBtn.disabled = false;
     }
 
+    function textAreaPaste(e){
+        e.preventDefault();
+        return false;
+    }
+
     function nextBtnClick() {
         let text = textArea.value.trim();
         if (!text) {
@@ -159,6 +164,8 @@ function doTextInputPage(callback, text) {
         console.log(csv);
         nextBtn.removeEventListener("click", nextBtnClick);
         textArea.removeEventListener("keypress", textAreaKeyPress);
+        textArea.removeEventListener("paste", textAreaPaste);
+        textArea.removeEventListener("drop", textAreaPaste);
         Utility.fadeOut(page)
             .then(callback);
     }
@@ -166,6 +173,8 @@ function doTextInputPage(callback, text) {
     alert.innerHTML = text;
     nextBtn.addEventListener("click", nextBtnClick);
     textArea.addEventListener("keypress", textAreaKeyPress);
+    textArea.addEventListener("paste", textAreaPaste);
+    textArea.addEventListener("drop", textAreaPaste);
     textArea.value = "";
     nextBtn.disabled = true;
     Utility.fadeIn(page)

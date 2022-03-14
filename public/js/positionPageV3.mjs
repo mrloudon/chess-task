@@ -53,7 +53,6 @@ const Positions = [
         toMove: "w",
         scores: {
             "a1-c1": 2.18,
-            "a1-b1": 1.25,
             "a2-a4": 1.14
         }
     },
@@ -70,9 +69,10 @@ const Positions = [
         title: "Position 6",
         toMove: "b",
         scores: {
-            "a7-h7": 3.11,
-            "d8-c8": 2.69,
-            "f8-h8": 2.65
+            "d8-c8": 2.69 ,
+            "f8-h8": 2.36,
+            "a7-h7": 2.33              
+           
         }
     },
     {
@@ -100,11 +100,8 @@ const Positions = [
         title: "Position 10",
         toMove: "b",
         scores: {
-            "f8-f7": 0.49,
-            "g8-h8": 0.47,
-            "e6-e5": 0.47,
-            "h7-h6": 0.16
-
+            "h7-h6": 0.16,
+            "c8-d7": 0.16
         }
     },
     {

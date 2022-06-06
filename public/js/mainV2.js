@@ -2,30 +2,42 @@ import * as Utility from "./utility.mjs";
 import { doPractice, doBlock, PositionNames } from "./positionPageV3.mjs";
 import { doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage, doGoodbyePage, condition } from "./textPages.mjs";
 
-const tasks = [doLoginPage, doEthicsPage, doPrePracticePage, doPractice, 
-    doBlock1Page, doBlock1, doTextInputPage14, 
-    doBlock2Page, doBlock2, doTextInputPage23, 
-    doBlock3Page, doBlock3, doTextInputPage23,
-    doBlock4Page, doBlock4, doTextInputPage14,
+const tasks = [doLoginPage, doEthicsPage, doPrePracticePage, doPractice,
+    doBlock1Page, doBlock1, doTextInputPage1,
+    doBlock2Page, doBlock2, doTextInputPage2,
+    doBlock3Page, doBlock3, doTextInputPage3,
+    doBlock4Page, doBlock4, doTextInputPage4,
     doGoodbyePage];
 
 //const tasks = [doLoginPage, doEthicsPage, doPrePracticePage, doPractice,
 //    doBlock1Page, doBlock1, doTextInputPage1, doBlock2Page, doBlock2, doTextInputPage2, doGoodbyePage];
 
 function doBlock1Page(callback) {
-    doBlockPage(callback, "Position 1");
+    doBlockPage(callback, {
+        titleText: "Position 1",
+        championship: false
+    });
 }
 
 function doBlock2Page(callback) {
-    doBlockPage(callback, "Position 2");
+    doBlockPage(callback, {
+        titleText: "Position 2",
+        championship: "Try and analyse the chess position as you are making your move because once you have made your move you will be asked to fill in an identical questionnaire to the one you previously answered."
+    });
 }
 
 function doBlock3Page(callback) {
-    doBlockPage(callback, "Position 3");
+    doBlockPage(callback, {
+        titleText: "Position 3",
+        championship: false
+    });
 }
 
 function doBlock4Page(callback) {
-    doBlockPage(callback, "Position 4");
+    doBlockPage(callback, {
+        titleText: "Position 4",
+        championship: "Try and pay close attention to the action involved in making your move because you will be asked to fill out another questionnaire identical to the one you just filled out regarding your memories of this move."
+    });
 }
 
 function doBlock1(callback) {
@@ -88,13 +100,37 @@ function doBlock4(callback) {
     doBlock(callback, positions);
 }
 
-function doTextInputPage14(callback) {
-    const text = "Certain ideas/steps are involved in planning the best chess move. Please list as many ideas/steps as you can think of that are involved.";
+function doTextInputPage1(callback) {
+    const text = `<p>Write down your analysis of the position you just saw.</p>
+        <p>
+            Examples could include - the opponent’s threats, both sides tactics, what you are trying to do, any of your plans and/or goals, 
+            moves you rejected, any other candidate moves you had for best move, and general principles for playing this position.
+        </p>`;
     doTextInputPage(callback, text);
 }
 
-function doTextInputPage23(callback) {
-    const text = "Pretend that your friend just walked into the room. Describe the last move you made in enough detail so that your friend could make the same move as you.";
+function doTextInputPage2(callback) {
+    const text = `<p>Write down your analysis of the position you just saw.</p>
+        <p>
+            Examples could include - the opponent’s threats, both sides tactics, what you are trying to do, any of your plans and/or goals, 
+            moves you rejected, any other candidate moves you had for best move, and general principles for playing this position.
+        </p>`;
+    doTextInputPage(callback, text);
+}
+
+function doTextInputPage3(callback) {
+    const text = `<p>Pretend that your friend just walked in the room. Describe the move you just made in enough 
+    detail so that your friend could duplicate the move you made in detail, doing it just like you did.</p>
+    <p>Additional information - the friend has a basic understanding of chess, and therefore your instructions or recipe need to be written 
+    in plain language to allow the move to be duplicated in all its details by the friend who has not seen you making the move.</p>`;
+    doTextInputPage(callback, text);
+}
+
+function doTextInputPage4(callback) {
+    const text = `<p>Pretend that your friend just walked in the room. Describe the move you just made in enough 
+    detail so that your friend could duplicate the move you made in detail, doing it just like you did.</p>
+    <p>Additional information - the friend has a basic understanding of chess, and therefore your instructions or recipe need to be written 
+    in plain language to allow the move to be duplicated in all its details by the friend who has not seen you making the move.</p>`;
     doTextInputPage(callback, text);
 }
 

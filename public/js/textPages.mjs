@@ -97,7 +97,7 @@ function doEthicsPage(callback) {
     Utility.fadeIn(page);
 }
 
-function doBlockPage(callback, titleText) {
+function doBlockPage(callback, { titleText, championship }) {
     console.log("doBlockPage");
 
     const page = document.getElementById("block-text-page");
@@ -115,7 +115,7 @@ function doBlockPage(callback, titleText) {
     for (const span of moveTimeSpans) {
         span.innerHTML = condition.moveTimeText;
     }
-    championshipP.innerHTML = condition.championship;
+    championshipP.innerHTML = championship || condition.championship;
     title.innerHTML = titleText;
     nextBtn.addEventListener("click", nextBtnClick);
     Utility.fadeIn(page);
@@ -145,7 +145,7 @@ function doTextInputPage(callback, text) {
         nextBtn.disabled = false;
     }
 
-    function textAreaPaste(e){
+    function textAreaPaste(e) {
         e.preventDefault();
         return false;
     }

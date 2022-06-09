@@ -1,34 +1,34 @@
 import * as Utility from "./utility.mjs";
 
-const compensationText = "$xx";
+//const compensationText = "$xx";
 const Conditions = {
     RapidStandard: {
         name: "Rapid Standard",
         moveTimeText: "four minutes",
         moveTime: 4 * 60,
         taskTimeText: "40 minutes",
-        championship: "Pretend you are playing at The World Rapid Chess Championship."
+        championship: "Pretend you are playing at The World Chess Championship."
     },
     RapidRandom: {
         name: "Rapid Random",
         moveTimeText: "four minutes",
         moveTime: 4 * 60,
         taskTimeText: "40 minutes",
-        championship: "Pretend you are playing at The World Rapid Chess Championship."
+        championship: "Pretend you are playing at The World Chess Championship."
     },
     BlitzStandard: {
         name: "Blitz Standard",
         moveTimeText: "40 seconds",
         moveTime: 40,
         taskTimeText: "20 minutes",
-        championship: "Pretend you are playing at The World Blitz Chess Championship."
+        championship: "Pretend you are playing at The World Chess Championship."
     },
     BlitzRandom: {
         name: "Blitz Random",
         moveTimeText: "40 seconds",
         moveTime: 40,
         taskTimeText: "20 minutes",
-        championship: "Pretend you are playing at The World Blitz Chess Championship."
+        championship: "Pretend you are playing at The World Chess Championship."
     }
 };
 
@@ -82,7 +82,7 @@ function doEthicsPage(callback) {
     const nextBtn = page.querySelector("button.next-btn");
     const moveTimeSpan = page.querySelector("span.move-time-span");
     const taskTimeSpan = page.querySelector("span.task-time-span");
-    const compensationSpan = page.querySelector("span.compensation-span");
+    //const compensationSpan = page.querySelector("span.compensation-span");
 
     function nextBtnClick() {
         nextBtn.removeEventListener("click", nextBtnClick);
@@ -92,15 +92,15 @@ function doEthicsPage(callback) {
 
     moveTimeSpan.innerHTML = condition.moveTimeText;
     taskTimeSpan.innerHTML = condition.taskTimeText;
-    compensationSpan.innerHTML = compensationText;
+    //compensationSpan.innerHTML = compensationText;
     nextBtn.addEventListener("click", nextBtnClick);
     Utility.fadeIn(page);
 }
 
-function doBlockPage(callback, { titleText, championship }) {
+function doBlockPage(callback, { pageId, titleText, championship }) {
     console.log("doBlockPage");
 
-    const page = document.getElementById("block-text-page");
+    const page = document.getElementById(pageId);
     const nextBtn = page.querySelector("button.next-btn");
     const moveTimeSpans = page.querySelectorAll("span.move-time-span");
     const championshipP = page.querySelector("p.championship-p");
@@ -115,7 +115,11 @@ function doBlockPage(callback, { titleText, championship }) {
     for (const span of moveTimeSpans) {
         span.innerHTML = condition.moveTimeText;
     }
-    championshipP.innerHTML = championship || condition.championship;
+    
+    if(championshipP){
+        championshipP.innerHTML = championship || condition.championship;
+    }
+    
     title.innerHTML = titleText;
     nextBtn.addEventListener("click", nextBtnClick);
     Utility.fadeIn(page);

@@ -14,6 +14,7 @@ const tasks = [doLoginPage, doEthicsPage, doPrePracticePage, doPractice,
 
 function doBlock1Page(callback) {
     doBlockPage(callback, {
+        pageId: "block-1-text-page",
         titleText: "Position 1",
         championship: false
     });
@@ -21,6 +22,7 @@ function doBlock1Page(callback) {
 
 function doBlock2Page(callback) {
     doBlockPage(callback, {
+        pageId: "block-2-text-page",
         titleText: "Position 2",
         championship: "Try and analyse the chess position as you are making your move because once you have made your move you will be asked to fill in an identical questionnaire to the one you previously answered."
     });
@@ -28,6 +30,7 @@ function doBlock2Page(callback) {
 
 function doBlock3Page(callback) {
     doBlockPage(callback, {
+        pageId: "block-3-text-page",
         titleText: "Position 3",
         championship: false
     });
@@ -35,6 +38,7 @@ function doBlock3Page(callback) {
 
 function doBlock4Page(callback) {
     doBlockPage(callback, {
+        pageId: "block-4-text-page",
         titleText: "Position 4",
         championship: "Try and pay close attention to the action involved in making your move because you will be asked to fill out another questionnaire identical to the one you just filled out regarding your memories of this move."
     });

@@ -20,7 +20,7 @@ function writeItem(){
         rString = randomString(4, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
         if(!idSet.has(rString)){
             idSet.add(rString);
-            stream.write(`${rString},${(n % 4) + 1}\n`, writeItem);
+            stream.write(`${rString},${(n % 3) + 1}\n`, writeItem);
             n++;
         }
     }

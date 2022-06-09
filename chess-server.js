@@ -12,8 +12,8 @@ const CONDITION_NAMES = {
     "4": "BlitzRandom"
 };
 
-const N_POSITIONS = 6;
-const BLOCK_SIZE = 2;
+const N_POSITIONS = 4;
+const BLOCK_SIZE = 1;
 
 let CSV_HEADER;
 //const CSV_HEADER = `"Date","Time","IP","ID","Condition","Source","Target","Score","RT","Source","Target","Score","RT","Source","Target","Score","RT","Text","Source","Target","Score","RT","Source","Target","Score","RT","Source","Target","Score","RT","Text"\n`;
@@ -67,6 +67,7 @@ async function readParticipants() {
             conditionName: CONDITION_NAMES[items[1].trim()]
         });
     }
+    //console.log(participants);
     return participants;
 }
 
@@ -116,6 +117,6 @@ async function attachApp(app) {
 
 }
 constructCSVHeader();
-//console.log("Header", CSV_HEADER);
+console.log("Header", CSV_HEADER);
 
 module.exports = { attachApp };

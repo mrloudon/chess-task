@@ -7,7 +7,8 @@ import { condition, csv, addCSV } from "./textPages.mjs";
 const page = document.getElementById("position-page");
 const nextBtn = page.querySelector(".next-btn");
 const resetBtn = page.querySelector(".reset-btn");
-const alert = page.querySelector("div.alert");
+const clockAlert = page.querySelector("div.clock-alert");
+const practiceAlert = page.querySelector("div.practice-alert");
 const positionTitle = page.querySelector(".position-title");
 const moveTitle = page.querySelector(".move-title");
 const topHeading = page.querySelector(".top-heading");
@@ -69,10 +70,10 @@ const Positions = [
         title: "Position 6",
         toMove: "b",
         scores: {
-            "d8-c8": 2.69 ,
+            "d8-c8": 2.69,
             "f8-h8": 2.36,
-            "a7-h7": 2.33              
-           
+            "a7-h7": 2.33
+
         }
     },
     {
@@ -355,7 +356,13 @@ function nextBtnClick() {
     if (doingPractice || blockCompleted) {
         removeListeners();
         Utility.fadeOut(page)
-            .then(nextTask);
+            .then(() => {
+                if (doingPractice) {
+                    practiceAlert.style.display = "none";
+                    clockAlert.classList.remove("invisible");
+                }
+                nextTask();
+            });
     }
     else {
         position = Positions[positionIndices.shift()];
@@ -409,7 +416,8 @@ function doPractice(callback) {
         toMove: "w"
     };
     attachListeners();
-    alert.innerHTML = `Use this practice position to familiarise yourself with making a move.<br>
+    clockAlert.classList.add("invisible");
+    practiceAlert.innerHTML = `Use this practice position to familiarise yourself with making a move.<br>
         Click <strong>Next</strong> to move on to the main task. Click <strong>Reset</strong> to reset the practice position.`;
     Utility.fadeIn(page)
         .then(showPosition);
@@ -425,7 +433,7 @@ function doBlock(callback, indices) {
     //position = Positions[positionIndices.shift()];
     attachListeners();
     countDown = condition.moveTime;
-    alert.innerHTML = `<h1 class="display-5 font-monospace">${getCountDownString()}</h1>`;
+    clockAlert.innerHTML = `<h1 class="display-5 font-monospace">${getCountDownString()}</h1>`;
     timeHeader = page.querySelector("h1.display-5");
     Utility.fadeIn(page)
         .then(nextBtnClick);

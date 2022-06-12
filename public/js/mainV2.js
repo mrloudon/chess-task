@@ -2,16 +2,16 @@ import * as Utility from "./utility.mjs";
 import { doPractice, doBlock, PositionNames } from "./positionPageV3.mjs";
 import { doLoginPage, doEthicsPage, doPrePracticePage, doBlockPage, doTextInputPage, doGoodbyePage, condition } from "./textPages.mjs";
 
-/* const tasks = [doLoginPage, doEthicsPage, doPrePracticePage, doPractice,
+const tasks = [doLoginPage, doEthicsPage, doPrePracticePage, doPractice,
     doBlock1Page, doBlock1, doTextInputPage1,
     doBlock2Page, doBlock2, doTextInputPage2,
     doBlock3Page, doBlock3, doTextInputPage3,
     doBlock4Page, doBlock4, doTextInputPage4,
-    doGoodbyePage]; */
+    doGoodbyePage];
 
-const tasks = [doLoginPage,
+/* const tasks = [doLoginPage,
     doBlock1Page, doBlock1, doTextInputPage1, doBlock2Page, doBlock2, doTextInputPage2, doGoodbyePage];
-
+ */
 function doBlock1Page(callback) {
     doBlockPage(callback, {
         pageId: "block-1-text-page",

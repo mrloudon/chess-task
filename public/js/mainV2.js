@@ -123,16 +123,14 @@ function doTextInputPage2(callback) {
 }
 
 function doTextInputPage3(callback) {
-    const text = `<p>Pretend that your friend just walked in the room. Describe the move you just made in enough 
-    detail so that your friend could duplicate the move you made in detail, doing it just like you did.</p>
+    const text = `<p>Pretend that your friend just walked in the room. Describe the move you just made in enough detail so that your friend could duplicate the move by doing it just like you did.</p>
     <p>Additional information - the friend has a basic understanding of chess, and therefore your instructions or recipe need to be written 
     in plain language to allow the move to be duplicated in all its details by the friend who has not seen you making the move.</p>`;
     doTextInputPage(callback, text);
 }
 
 function doTextInputPage4(callback) {
-    const text = `<p>Pretend that your friend just walked in the room. Describe the move you just made in enough 
-    detail so that your friend could duplicate the move you made in detail, doing it just like you did.</p>
+    const text = `<p>Pretend that your friend just walked in the room. Describe the move you just made in enough detail so that your friend could duplicate the move by doing it just like you did.</p>
     <p>Additional information - the friend has a basic understanding of chess, and therefore your instructions or recipe need to be written 
     in plain language to allow the move to be duplicated in all its details by the friend who has not seen you making the move.</p>`;
     doTextInputPage(callback, text);

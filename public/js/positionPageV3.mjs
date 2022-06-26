@@ -328,7 +328,7 @@ function showPosition() {
         positionTitle.innerHTML = `Position ${positionCounter}`;
         positionCounter++;
     }
-    moveTitle.innerHTML = toMove();
+    //moveTitle.innerHTML = toMove();
     if (!position) {
         return;
     }
@@ -423,7 +423,7 @@ function doPractice(callback) {
         .then(showPosition);
 }
 
-function doBlock(callback, indices) {
+function doBlockPart2(callback, indices) {
     resetBtn.style.display = "none";
     nextBtn.disabled = true;
     nextTask = callback;
@@ -438,5 +438,25 @@ function doBlock(callback, indices) {
     Utility.fadeIn(page)
         .then(nextBtnClick);
 }
+
+function doBlock(callback, indices) {
+    const toMovePage = document.getElementById("to-move-page");
+    const doneBtn = toMovePage.querySelector(".next-btn");
+    const toMoveTitle = toMovePage.querySelector(".to-move");
+
+    function doneBtnClick() {
+        doneBtn.removeEventListener("click", doneBtnClick);
+        Utility.fadeOut(toMovePage)
+            .then(() => doBlockPart2(callback, indices));
+    }
+
+    // Ugly hack!
+    toMoveTitle.innerHTML = Positions[indices[0]].toMove === "w" ? "White to play<br>&nbsp;" : "Black to play<br>&nbsp;";
+    doneBtn.addEventListener("click", doneBtnClick);
+
+    Utility.fadeIn(toMovePage);
+}
+
+moveTitle.style.display = "none";
 
 export { doPractice, doBlock, PositionNames };

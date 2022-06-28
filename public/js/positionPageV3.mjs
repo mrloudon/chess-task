@@ -451,7 +451,7 @@ function doBlock(callback, indices) {
     }
 
     // Ugly hack!
-    toMoveTitle.innerHTML = Positi-ons[indices[0]].toMove === "w" ? "White to play<br>&nbsp;" : "Black to play<br>&nbsp;";
+    toMoveTitle.innerHTML = Positions[indices[0]].toMove === "w" ? "White to play<br>&nbsp;" : "Black to play<br>&nbsp;";
     doneBtn.addEventListener("click", doneBtnClick);
 
     Utility.fadeIn(toMovePage);

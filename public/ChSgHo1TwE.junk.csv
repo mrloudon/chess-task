@@ -1,0 +1,7 @@
+"Date","Time","IP","ID","Condition","Source 1","Target 1","Score 1","RT 1","Text 1","Source 2","Target 2","Score 2","RT 2","Text 2","Source 3","Target 3","Score 3","RT 3","Text 3","Source 4","Target 4","Score 4","RT 4","Text 4"
+6/10/2022, 8:34:15 AM,::1,"vVXk","Rapid Standard","f1","e1",0,2580,"this is text 1","d3","f5",0,5928,"text 2","h6","g7",0,3556,"text 3","f8","e8",0,2586,"text 4"
+6/10/2022, 8:52:01 AM,::1,"vVXk","Rapid Standard","a2","d5",3.42,13927,"text 1","a1","c1",2.18,44474,"text 2","d8","c8",2.69,5846,"text 3","h7","h6",0.16,17747,"text 4"
+6/13/2022, 8:34:41 AM,::1,"vVXk","Rapid Standard","a2","d5",3.42,14692,"sfsdfsfsd","a1","c1",2.18,6156,"ffghfhggfh","h6","g7",0,7078,"ffhfghg","c8","d7",0.16,13741,"cbvcb"
+6/15/2022, 4:15:26 PM,::1,"vVXk","Rapid Standard","a2","d5",3.42,6971,"dsfsd","a1","c1",2.18,2488,"sdfsdg","h6","g7",0,3944,"sdgsg","f6","e4",0,9398,"ghfhgf"
+6/27/2022, 10:48:58 AM,::1,"vVXk","Rapid Standard","f2","f3",0,4698,"sdsfsdfs","d3","c2",0,1949,"cbbvbc","f8","g8",0,9889,"ggdsf","f8","e8",0,2433,"xcvv"
+6/27/2022, 11:00:33 AM,::1,"vVXk","Rapid Standard","f1","e1",0,1327,"adsad","d3","c2",0,1958,"sadasdd","f8","h8",2.36,1894,"asdads","c8","d7",0.16,2216,"sadsad"

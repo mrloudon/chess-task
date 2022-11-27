@@ -4,6 +4,7 @@ const fs = require("fs");
 const readline = require("readline");
 
 const OUTPUT_FILE = "public/ChSgHo1TwE.csv";
+const LOGIN_FILE = "public/logins.csv";
 const PARTICIPANTS_FILE = "participants.txt";
 const CONDITION_NAMES = {
     "1": "RapidStandard",
@@ -85,20 +86,30 @@ async function attachApp(app) {
     app.get("/validate", (req, resp) => {
         const id = req.query.id || "";
         const participant = getParticipantFromId(id);
+        const dt = new Date();
+        const ip = req.headers["x-forwarded-for"] || req.ip;
+
         let result;
 
         if (participant) {
+            fs.appendFile(LOGIN_FILE, `${dt.toLocaleString()},${ip},${participant}\n`, function(err){
+                if(err) throw err;
+            });
             result = {
                 ok: "VALID",
                 participant
             }
         }
         else {
+            fs.appendFile(LOGIN_FILE, `${dt.toLocaleString()},${ip},No ID\n`, function(err){
+                if(err) throw err;
+            });
             result = {
                 ok: "INVALID",
                 participant: {}
             }
         }
+
         resp
             .status(200)
             .json(result);

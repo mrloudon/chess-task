@@ -92,7 +92,7 @@ async function attachApp(app) {
         let result;
 
         if (participant) {
-            fs.appendFile(LOGIN_FILE, `${dt.toLocaleString()},${ip},${participant}\n`, function(err){
+            fs.appendFile(LOGIN_FILE, `${dt.toLocaleString()},${ip},${participant.id}\n`, function(err){
                 if(err) throw err;
             });
             result = {
